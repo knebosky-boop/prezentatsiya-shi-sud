@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ШІ в роботі судді — коротко</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --navy2:#243a63; --gold:#c9a227; --ink:#22293a;
+    --paper:#f7f5f0; --muted:#6b7280; --accent:#8b1e2d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{font-family:Georgia,'Times New Roman',serif;background:#0e1526;color:var(--ink)}
+  .deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:calc(env(safe-area-inset-top) + 56px) 24px calc(env(safe-area-inset-bottom) + 52px);
+    background:var(--paper);position:relative;
+  }
+  .slide.dark{background:linear-gradient(150deg,var(--navy) 0%,var(--navy2) 100%);color:#f2efe6}
+  .kicker{font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  h1{font-size:clamp(28px,8.4vw,38px);line-height:1.14;font-weight:700}
+  h2{font-size:clamp(23px,6.8vw,30px);line-height:1.18;margin-bottom:22px;color:var(--navy)}
+  .dark h2{color:#f2efe6}
+  h2 .num{color:var(--gold);margin-right:10px}
+  .sub{font-size:17px;color:var(--muted);margin-top:18px;line-height:1.5}
+  .dark .sub{color:#c9cfdd}
+  ul.main{list-style:none;font-size:19px;line-height:1.4}
+  ul.main>li{padding:14px 0 14px 24px;position:relative;border-bottom:1px solid rgba(27,42,74,.12)}
+  ul.main>li:last-child{border-bottom:none}
+  ul.main>li::before{content:"—";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .dark ul.main>li{border-color:rgba(255,255,255,.14)}
+  b{color:var(--navy)} .dark b{color:#ffd867}
+  .note{margin-top:22px;padding:14px 16px;background:rgba(201,162,39,.12);border-left:4px solid var(--gold);
+        font-size:16px;line-height:1.45}
+  .dark .note{background:rgba(255,255,255,.07);color:#e8e4d6}
+  .warn{border-left-color:var(--accent);background:rgba(139,30,45,.08)}
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:8px}
+  .step{counter-increment:st;display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(27,42,74,.12)}
+  .step:last-child{border-bottom:none}
+  .step::before{content:counter(st);flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);
+                display:flex;align-items:center;justify-content:center;font-family:Verdana,sans-serif;font-size:15px;font-weight:700}
+  .step div{font-size:18px;line-height:1.35}
+  .footer{position:absolute;left:24px;right:24px;bottom:calc(env(safe-area-inset-bottom) + 14px);
+          display:flex;justify-content:space-between;
+          font-family:Verdana,Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .dark .footer{color:#8f9ab5}
+  .quote{font-size:23px;line-height:1.4;font-style:italic;position:relative;padding-left:26px}
+  .quote::before{content:"«";position:absolute;left:0;top:-8px;font-size:50px;color:var(--gold);font-style:normal}
+  .tag{display:inline-block;font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+       background:var(--navy);color:#f2efe6;padding:4px 12px;border-radius:3px;margin-bottom:18px;align-self:flex-start}
+  .dark .tag{background:var(--gold);color:var(--navy)}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:10;
+          padding:calc(env(safe-area-inset-top) + 8px) 22px 8px;
+          display:flex;justify-content:space-between;align-items:center;
+          font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.06em;
+          color:#c9cfdd;background:linear-gradient(to bottom,rgba(14,21,38,.55),rgba(14,21,38,0));
+          pointer-events:none}
+  .topbar .counter{font-variant-numeric:tabular-nums;background:rgba(14,21,38,.55);color:#f2efe6;
+                   padding:3px 10px;border-radius:12px}
+  .swipe-hint{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 6px);left:50%;transform:translateX(-50%);
+        z-index:10;font-family:Verdana,sans-serif;font-size:10px;color:#9aa3b8;letter-spacing:.08em;
+        background:rgba(14,21,38,.55);padding:3px 12px;border-radius:12px;
+        transition:opacity .6s;pointer-events:none}
+  .swipe-hint.gone{opacity:0}
+</style>
+</head>
+<body>
+<div class="topbar"><span>ШІ в роботі судді · коротко</span><span class="counter" id="counter">1 / 8</span></div>
+<div class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide dark">
+  <div class="kicker">Дніпропетровський окружний адміністративний суд</div>
+  <h1>ШІ-помічник судді</h1>
+  <div class="sub">Коротко: що він робить, за якими правилами і де межа.</div>
+  <div class="footer"><span>Суддя Ремез К.&nbsp;І.</span></div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2><span class="num">01</span>Що це таке</h2>
+  <ul class="main">
+    <li>Помічник працює <b>на комп'ютері судді</b>, у папках справ.</li>
+    <li>Сам читає справу: позов, додатки, скани.</li>
+    <li>Сам готує <b>проєкт документа</b> у Word.</li>
+    <li>Має закони в чинних редакціях і архів практики.</li>
+  </ul>
+  <div class="note">Це не «чат у браузері», куди треба щось копіювати.</div>
+</section>
+
+<!-- 3 -->
+<section class="slide dark">
+  <div class="tag">Головне</div>
+  <div class="quote">Помічник готує матеріал. Рішення ухвалює суддя.</div>
+  <div class="note">До кожного проєкту він додає коментар: що знайшов, у чому ризик, де сумнівається.</div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <h2><span class="num">02</span>Шлях справи</h2>
+  <div class="steps">
+    <div class="step"><div>Забирає справу і розпізнає <b>всі</b> документи.</div></div>
+    <div class="step"><div>Перевіряє вимоги, строки, збір, норми.</div></div>
+    <div class="step"><div>Піднімає практику: свою, апеляції, Верховного Суду.</div></div>
+    <div class="step"><div>Пише проєкт за каркасом рішень судді.</div></div>
+    <div class="step"><div>Суддя читає, править, ухвалює.</div></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <h2><span class="num">03</span>Правила, які його тримають</h2>
+  <ul class="main">
+    <li>Кожен висновок — <b>з джерелом</b>: справа, дата, суд.</li>
+    <li>Текст норми — з корпусу законів, не з чужого рішення.</li>
+    <li>Не знає — <b>так і каже</b>. Вигадувати заборонено.</li>
+    <li>Бачить помилку судді — говорить прямо і одразу.</li>
+  </ul>
+  <div class="note warn">Мовчазна згода з помилкою — найгірше, що помічник може зробити.</div>
+</section>
+
+<!-- 6 -->
+<section class="slide dark">
+  <h2><span class="num">04</span>Чого не можна ніколи</h2>
+  <ul class="main">
+    <li>Вигадувати номери, дати, цитати.</li>
+    <li>Ухвалювати процесуальні рішення за суддю.</li>
+    <li>Переказувати чи скорочувати позовні вимоги.</li>
+    <li>Видавати чернетку за готовий документ.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <h2><span class="num">05</span>Що це дає</h2>
+  <ul class="main">
+    <li><b>Час.</b> Рутина йде з судді повністю.</li>
+    <li><b>Повнота.</b> Прочитано всі матеріали, а не вибірково.</li>
+    <li><b>Рівність.</b> Однорідні справи — однакові рішення.</li>
+    <li><b>Пам'ять.</b> Кожна знайдена пастка лягає в правила.</li>
+  </ul>
+  <div class="note">Чесно: помічник помиляється. Тому все тримається на джерелах, звірках і слові судді.</div>
+</section>
+
+<!-- 8 -->
+<section class="slide dark">
+  <div class="kicker">Підсумок</div>
+  <h1>ШІ не замінює суддю. Він забирає рутину і повертає час на рішення.</h1>
+  <div class="sub">Дякую. Питання?</div>
+  <div class="footer"><span>Суддя Ремез К.&nbsp;І. · Дніпропетровський окружний адмінсуд</span></div>
+</section>
+
+</div>
+<div class="swipe-hint" id="hint">гортайте вгору ↑</div>
+<script>
+const deck=document.getElementById('deck');
+const slides=[...deck.querySelectorAll('.slide')];
+const counter=document.getElementById('counter');
+const hint=document.getElementById('hint');
+function update(){
+  const i=Math.round(deck.scrollTop/window.innerHeight);
+  const n=Math.max(0,Math.min(slides.length-1,i));
+  counter.textContent=(n+1)+' / '+slides.length;
+  if(n>0)hint.classList.add('gone');
+}
+deck.addEventListener('scroll',update,{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:-window.innerHeight,behavior:'smooth'});}
+});
+update();
+</script>
+</body>
+</html>
