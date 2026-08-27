@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Штучний інтелект у роботі судді</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --navy2:#243a63; --gold:#c9a227; --ink:#22293a;
+    --paper:#f7f5f0; --muted:#6b7280; --accent:#8b1e2d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{font-family:Georgia,'Times New Roman',serif;background:#0e1526;color:var(--ink)}
+  .deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:calc(env(safe-area-inset-top) + 52px) 22px calc(env(safe-area-inset-bottom) + 48px);
+    background:var(--paper);position:relative;
+  }
+  .slide.dark{background:linear-gradient(150deg,var(--navy) 0%,var(--navy2) 100%);color:#f2efe6}
+  .kicker{font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-size:clamp(26px,7.5vw,34px);line-height:1.16;font-weight:700}
+  h2{font-size:clamp(20px,5.8vw,26px);line-height:1.2;margin-bottom:16px;color:var(--navy)}
+  .dark h2{color:#f2efe6}
+  h2 .num{color:var(--gold);margin-right:10px}
+  .sub{font-size:16px;color:var(--muted);margin-top:16px;line-height:1.5}
+  .dark .sub{color:#c9cfdd}
+  ul.main{list-style:none;font-size:15.5px;line-height:1.45}
+  ul.main>li{padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(27,42,74,.12)}
+  ul.main>li:last-child{border-bottom:none}
+  ul.main>li::before{content:"—";position:absolute;left:0;color:var(--gold);font-weight:700}
+  .dark ul.main>li{border-color:rgba(255,255,255,.14)}
+  b{color:var(--navy)} .dark b{color:#ffd867}
+  .note{margin-top:18px;padding:12px 14px;background:rgba(201,162,39,.12);border-left:4px solid var(--gold);
+        font-size:14px;line-height:1.45}
+  .dark .note{background:rgba(255,255,255,.07);color:#e8e4d6}
+  .warn{border-left-color:var(--accent);background:rgba(139,30,45,.08)}
+  .cols{display:flex;flex-direction:column;gap:20px}
+  .col h3{font-family:Verdana,Arial,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+          color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--gold)}
+  .col ul{list-style:none;font-size:14.5px;line-height:1.5}
+  .col li{padding:6px 0 6px 18px;position:relative}
+  .col li::before{content:"·";position:absolute;left:2px;color:var(--gold);font-weight:700;font-size:22px;line-height:1}
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:6px}
+  .step{counter-increment:st;display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(27,42,74,.12)}
+  .step:last-child{border-bottom:none}
+  .step::before{content:counter(st);flex:0 0 30px;height:30px;border-radius:50%;background:var(--navy);color:var(--gold);
+                display:flex;align-items:center;justify-content:center;font-family:Verdana,sans-serif;font-size:14px;font-weight:700}
+  .step div{font-size:14.5px;line-height:1.45;padding-top:4px}
+  .footer{position:absolute;left:22px;right:22px;bottom:calc(env(safe-area-inset-bottom) + 14px);
+          display:flex;justify-content:space-between;
+          font-family:Verdana,Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .dark .footer{color:#8f9ab5}
+  .quote{font-size:19px;line-height:1.45;font-style:italic;position:relative;padding-left:24px}
+  .quote::before{content:"«";position:absolute;left:0;top:-6px;font-size:44px;color:var(--gold);font-style:normal}
+  .tag{display:inline-block;font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+       background:var(--navy);color:#f2efe6;padding:4px 12px;border-radius:3px;margin-bottom:16px;align-self:flex-start}
+  .dark .tag{background:var(--gold);color:var(--navy)}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:10;
+          padding:calc(env(safe-area-inset-top) + 8px) 22px 8px;
+          display:flex;justify-content:space-between;align-items:center;
+          font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.06em;
+          color:#c9cfdd;background:linear-gradient(to bottom,rgba(14,21,38,.55),rgba(14,21,38,0));
+          pointer-events:none}
+  .topbar .counter{font-variant-numeric:tabular-nums;background:rgba(14,21,38,.55);color:#f2efe6;
+                   padding:3px 10px;border-radius:12px}
+  .swipe-hint{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 6px);left:50%;transform:translateX(-50%);
+        z-index:10;font-family:Verdana,sans-serif;font-size:10px;color:#9aa3b8;letter-spacing:.08em;
+        background:rgba(14,21,38,.55);padding:3px 12px;border-radius:12px;
+        transition:opacity .6s;pointer-events:none}
+  .swipe-hint.gone{opacity:0}
+</style>
+</head>
+<body>
+<div class="topbar"><span>ШІ в роботі судді</span><span class="counter" id="counter">1 / 14</span></div>
+<div class="deck" id="deck">
+
+<!-- 1. Титул -->
+<section class="slide dark">
+  <div class="kicker">Досвід Дніпропетровського окружного адміністративного суду</div>
+  <h1>Штучний інтелект як помічник судді</h1>
+  <div class="sub">Як організовано щоденну роботу з ШІ-асистентом: від матеріалів справи до проєкту рішення — і чому останнє слово завжди за суддею.</div>
+  <div class="footer"><span>Суддя Ремез К.&nbsp;І.</span></div>
+</section>
+
+<!-- 2. Що це взагалі таке -->
+<section class="slide">
+  <h2><span class="num">01</span>Що це — і що це не «чат у браузері»</h2>
+  <ul class="main">
+    <li>Асистент працює <b>на комп'ютері судді</b>, у робочих папках справ — а не на сторонньому сайті, куди треба щось копіювати.</li>
+    <li>Він <b>сам читає матеріали</b>: позов, додатки, скани — і сам готує проєкт документа у Word за шаблоном суду.</li>
+    <li>Має під рукою <b>корпус законодавства</b> в актуальних редакціях і <b>архів судової практики</b>.</li>
+    <li>Спілкування — звичайною мовою: «підготуй проєкт ухвали про відкриття», «знайди, чи встояла така позиція в апеляції».</li>
+  </ul>
+  <div class="note">Це не «згенеруй мені текст». Це помічник, який знає, де лежить справа, читає її сам і працює за писаними правилами судді.</div>
+</section>
+
+<!-- 3. Головний принцип -->
+<section class="slide dark">
+  <div class="tag">Принцип № 1</div>
+  <div class="quote">Асистент готує матеріал. Процесуальні рішення ухвалює суддя. Чернетка ніколи не видається за фінальний документ.</div>
+  <div class="note">До кожного проєкту асистент додає супровідний коментар: що знайдено, які є ризики, де він сумнівається. Суддя читає спершу коментар, потім проєкт.</div>
+</section>
+
+<!-- 4. Правила, зашиті в інструкцію -->
+<section class="slide">
+  <h2><span class="num">02</span>Писані правила: інструкція для асистента</h2>
+  <ul class="main">
+    <li>У робочій папці лежить <b>постійна інструкція</b> — «конституція» асистента: хто суддя, які категорії справ, що можна і що заборонено.</li>
+    <li>Жодного висновку <b>без джерела</b>: номер справи в ЄДРСР + дата + суд. Немає джерела — немає висновку.</li>
+    <li>Текст норми — <b>тільки з корпусу законодавства</b>, ніколи з цитати в чужому судовому рішенні: там трапляються нечинні редакції.</li>
+    <li>Не знає або бракує даних — <b>так і каже</b>. Вигадувати реквізити, дати й цитати заборонено прямо.</li>
+    <li>Окремі інструкції — на кожен жанр: рішення по суті, ухвали, вичитка, судовий збір.</li>
+  </ul>
+</section>
+
+<!-- 5. Обов'язок заперечити -->
+<section class="slide">
+  <h2><span class="num">03</span>Обов'язок заперечити судді</h2>
+  <ul class="main">
+    <li>Якщо вказівка судді <b>суперечить позиції Верховного Суду</b> чи практиці апеляції, спирається на нечинну редакцію норми або містить процесуальну помилку —</li>
+    <li>асистент <b>зобов'язаний сказати це прямо і одразу</b>, до здачі проєкту: у чому розбіжність, яка норма чи постанова їй суперечить, який варіант правильний.</li>
+    <li>Далі робота виконується так, як сказала суддя, — <b>рішення за нею</b>. Але ухвалюється воно зі знанням про ризик.</li>
+  </ul>
+  <div class="note warn">В інструкції це сформульовано жорстко: «мовчазна згода з помилкою — найгірше, що ти можеш зробити». Підлабузник за помічника — небезпечніший, ніж відсутність помічника.</div>
+</section>
+
+<!-- 6. Власний архів практики -->
+<section class="slide">
+  <h2><span class="num">04</span>Власний архів практики: докачка з ЄДРСР</h2>
+  <ul class="main">
+    <li>З відкритого реєстру ми <b>регулярно докачуємо рішення</b> у власний локальний архів: практику судді, Третього ААС, Верховного Суду за нашими категоріями.</li>
+    <li>Пошук у ньому — <b>секунди</b>, без черг і лімітів сайту реєстру, з фільтрами: суд, суддя, категорія, доля в апеляції.</li>
+    <li>Ключова можливість: <b>простежити долю власних рішень</b> — що встояло у Третьому ААС, що скасовано і з яким мотивом.</li>
+    <li>Чого немає в архіві — асистент дошукує в самому ЄДРСР, а знахідки докачуються до архіву на майбутнє.</li>
+  </ul>
+  <div class="note">Залізне правило: «нуль результатів в архіві» ≠ «такого акта не існує». Відсутність у локальній базі завжди перевіряється за реєстром.</div>
+</section>
+
+<!-- 7. Шлях справи -->
+<section class="slide">
+  <h2><span class="num">05</span>Шлях однієї справи</h2>
+  <div class="steps">
+    <div class="step"><div><b>Матеріали.</b> Асистент забирає справу з електронного кабінету і розпізнає всі скани — абсолютно всі документи, без вибірковості.</div></div>
+    <div class="step"><div><b>Аналіз.</b> Вимоги, строки, підсудність, збір; норми — з корпусу законодавства в редакції на потрібну дату.</div></div>
+    <div class="step"><div><b>Практика.</b> Опора: власні рішення судді → їхня доля в апеляції → свіжі позиції ВС. Кожна цитата звіряється з повним текстом.</div></div>
+    <div class="step"><div><b>Проєкт.</b> Word-документ за шаблоном суду, за каркасом готових рішень судді + супровідний коментар із ризиками.</div></div>
+    <div class="step"><div><b>Суддя.</b> Читає коментар і проєкт, править, ухвалює. Вичитка — окремим «свіжим» сеансом, який не бачив чернетки.</div></div>
+  </div>
+</section>
+
+<!-- 8. Канон судді -->
+<section class="slide">
+  <h2><span class="num">06</span>Проєкт пишеться «рукою судді»</h2>
+  <ul class="main">
+    <li>Каркас документа — <b>з готових рішень самої судді</b>, а не з абстрактних заготовок: структура, звороти, резолютив.</li>
+    <li><b>Однорідні справи — однакові рішення:</b> у межах категорії каркас звіряється автоматично, розбіжності підсвічуються.</li>
+    <li>Виклад позовних вимог <b>не скорочується і не переказується</b> — особливо в ухвалах про відкриття провадження.</li>
+    <li>Дрібниці теж зашиті правилами: заборонені кальки, канонічні формули резолютиву, три усталені редакції блоку оскарження.</li>
+  </ul>
+  <div class="note">Мета — щоб проєкт від асистента не відрізнявся стилістично від документа, який суддя написала б сама. Апеляція і сторони не мають бачити «швів».</div>
+</section>
+
+<!-- 9. Паралельні вікна і замки -->
+<section class="slide">
+  <h2><span class="num">07</span>Кілька помічників одночасно — і чому потрібні «замки»</h2>
+  <ul class="main">
+    <li>Паралельно працює <b>кілька вікон асистента</b>: одне пише рішення, друге — ухвали, третє вичитує.</li>
+    <li>Кожне вікно, беручи справу, <b>першою дією ставить «замок»</b> — позначку «зайнято» у спільній теці. Побачило чужий замок — бере наступну справу.</li>
+    <li>Кожне вікно одразу <b>називає в чаті, що взяло</b>: «Взяв № 160/…/26 — пишу ухвалу про…». Суддя бачить, хто чим зайнятий.</li>
+    <li>Ведеться <b>журнал</b>: хто взяв, коли, коли здав.</li>
+  </ul>
+  <div class="note warn">Правило народилося з інциденту: два вікна одночасно правили один файл, і одне мовчки затерло готову роботу іншого. Відтоді замок — перша дія, без винятків.</div>
+</section>
+
+<!-- 10. Контроль якості -->
+<section class="slide">
+  <h2><span class="num">08</span>Контроль якості: довіряй, але перевіряй</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Що перевіряється завжди</h3>
+      <ul>
+        <li>Кожна цитата практики — за повним текстом акта, не за анотацією</li>
+        <li>Кожна цифра в мотивах — механічним пошуком по розпізнаних матеріалах справи</li>
+        <li>Сума і підстава судового збору — за окремою інструкцією</li>
+        <li>Редакція норми — на дату спірних правовідносин</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Як організовано вичитку</h3>
+      <ul>
+        <li>Вичитує окремий сеанс, що не писав чернетку, — «свіже око»</li>
+        <li>Правки — прямо в текст, із кольоровим виділенням</li>
+        <li>Помічниця судді рецензує через спільну хмарну теку</li>
+        <li>Готовий акт зберігається у кілька копій: справа, архів, хмара</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Аналітика -->
+<section class="slide">
+  <h2><span class="num">09</span>Не лише проєкти: аналітика по власній практиці</h2>
+  <ul class="main">
+    <li><b>Профіль скасувань:</b> асистент зібрав по архіву всі скасовані апеляцією рішення, згрупував за категоріями і мотивами — стало видно, де саме системна вразливість, а де випадковість.</li>
+    <li><b>Ревізія опор:</b> зараз іде перевірка пулу зі 100 ухвалених актів — чи жива опора кожного: доля в апеляції, свіжі позиції ВС, чинність норм.</li>
+    <li><b>Тижневий огляд:</b> щопонеділка — довідка про нові позиції ВС і апеляції за категоріями судді.</li>
+    <li>Типові помилки з оглядів <b>дописуються в інструкції</b> — асистент більше їх не повторює.</li>
+  </ul>
+</section>
+
+<!-- 12. Заборони -->
+<section class="slide dark">
+  <h2><span class="num">10</span>Чого асистенту не можна ніколи</h2>
+  <ul class="main">
+    <li>Вигадувати реквізити справ, номери, дати, цитати — «не знайшов у базі» означає «цього в тебе немає».</li>
+    <li>Приймати процесуальні рішення замість судді.</li>
+    <li>Змінювати чи «покращувати» виклад позовних вимог.</li>
+    <li>Видавати чернетку за фінальний документ.</li>
+    <li>Мовчки погоджуватися з помилкою судді.</li>
+    <li>Перезаписувати чужу роботу — побачив конфлікт, зупинився і сказав.</li>
+  </ul>
+</section>
+
+<!-- 13. Що це дає -->
+<section class="slide">
+  <h2><span class="num">11</span>Що це дає на практиці</h2>
+  <ul class="main">
+    <li><b>Швидкість:</b> рутинна частина — розпізнавання, добір практики, каркас проєкту — знімається з судді повністю.</li>
+    <li><b>Повнота:</b> розпізнаються і читаються всі матеріали, а не «те, що встигли переглянути».</li>
+    <li><b>Передбачуваність:</b> однорідні справи отримують однакові за структурою рішення, звірені з долею попередніх в апеляції.</li>
+    <li><b>Пам'ять:</b> кожен висновок оглядів і кожна виявлена пастка лягає в інструкції — досвід накопичується, а не забувається.</li>
+  </ul>
+  <div class="note">Чесна межа: асистент помиляється — тому вся конструкція побудована не на довірі до нього, а на джерелах, звірках і фінальному слові судді.</div>
+</section>
+
+<!-- 14. Фінал -->
+<section class="slide dark">
+  <div class="kicker">Підсумок</div>
+  <h1 style="font-size:clamp(22px,6.4vw,30px)">ШІ не замінює суддю. Він забирає рутину і повертає час на те, що є суддівською роботою: оцінку і рішення.</h1>
+  <div class="sub">Дякую за увагу. Питання?</div>
+  <div class="footer"><span>Суддя Ремез К.&nbsp;І. · Дніпропетровський окружний адмінсуд</span></div>
+</section>
+
+</div>
+<div class="swipe-hint" id="hint">гортайте вгору ↑</div>
+<script>
+const deck=document.getElementById('deck');
+const slides=[...deck.querySelectorAll('.slide')];
+const counter=document.getElementById('counter');
+const hint=document.getElementById('hint');
+function update(){
+  const i=Math.round(deck.scrollTop/window.innerHeight);
+  const n=Math.max(0,Math.min(slides.length-1,i));
+  counter.textContent=(n+1)+' / '+slides.length;
+  if(n>0)hint.classList.add('gone');
+}
+deck.addEventListener('scroll',update,{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:-window.innerHeight,behavior:'smooth'});}
+});
+update();
+</script>
+</body>
+</html>
