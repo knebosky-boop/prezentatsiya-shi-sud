@@ -1,0 +1,152 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 2 · Як влаштована система КЛАВА</title><meta name="description" content="Робоче місце судді з ШІ: теки, правила, підключення, автоматика, з чого почати."><meta property="og:title" content="Урок 2 · Як влаштована система КЛАВА"><meta property="og:description" content="Робоче місце судді з ШІ: теки, правила, підключення, автоматика, з чого почати."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+</style></head><body><header class="hero" style="background:linear-gradient(135deg,#00b894 0%,#2a7bff 55%,#7b5cff 100%)">
+  <span class="tag">🏛 Урок 2 · як це виглядає в реальній роботі</span>
+  <h1>КЛАВА: як влаштоване моє робоче місце з ШІ</h1>
+  <p>Що виросло з уроку 1 за кілька місяців щоденної роботи. Не треба будувати все одразу — беріть по одній цеглинці.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="terminal.html">← Урок 1: встановлення</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Ідея одним абзацом</h2>
+  <p><b>КЛАВА</b> — це не окрема програма, а <b>тека на Google Диску</b>, у якій Claude працює як помічник судді. У ній лежать справи, правила, зразки і невеликі програми-помічники. Claude у кожній розмові читає правила і працює за ними, як працює за вашими вказівками досвідчений помічник.</p>
+  <div class="grid">
+    <div class="tile t4"><div class="e">🗄</div><b>Сховище</b><span>Теки справ, зразки, готові документи</span></div>
+    <div class="tile t2"><div class="e">📜</div><b>Правила</b><span>Як брати справу, як писати, як перевіряти</span></div>
+    <div class="tile t3"><div class="e">🔌</div><b>Підключення</b><span>Закони, практика, Електронний суд, Word</span></div>
+    <div class="tile t1"><div class="e">⏰</div><b>Автоматика</b><span>Що робиться саме, поки я сплю</span></div>
+  </div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">2</span>Сховище: порядок у теках</h2>
+  <p>Усе лежить на <b>Google Диску</b>, тому однаково відкривається на домашньому і робочому комп'ютері, а помічниця бачить готові проєкти у своїй спільній теці.</p>
+  <table>
+    <tr><td>📁 Справи</td><td>Одна справа — одна тека: матеріали, розпізнаний текст, проєкт, довідка до проєкту</td></tr>
+    <tr><td>📁 Рішення</td><td>Спільна тека з помічницею: готові проєкти по місяцях, окремо рішення, ухвали, довідки</td></tr>
+    <tr><td>📁 Інструкції</td><td>Правила ремесла: як писати рішення, ухвалу, рахувати судовий збір, вичитувати</td></tr>
+    <tr><td>📁 Шаблони</td><td>Бланки документів Word з полями, які помічник заповнює</td></tr>
+    <tr><td>📁 Засідання</td><td>Тека на кожен день засідань: що розглядаємо, що підготовлено</td></tr>
+  </table>
+  <div class="tip"><b>💡 Правило, яке береже нерви</b>Готовий проєкт завжди лежить у фіксованих місцях під передбачуваним ім'ям. Не треба шукати, «де він його зберіг».</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Правила: чому він пише «як я»</h2>
+  <p>Секрет не в розумній моделі, а в <b>записаних правилах</b>. Модель однакова в усіх; різниця — у тому, що ви їй написали.</p>
+  <div class="flow">
+    <div>📌 CLAUDE.md — завжди<small>Хто я, як звертатися, чого не можна ніколи: вигадувати реквізити, скорочувати позовні вимоги, мовчати, коли я помиляюся.</small></div>
+    <div>📘 Інструкції — під задачу<small>Окремий файл на рішення, на ухвалу, на вичитку, на судовий збір. Пише ухвалу — читає лише правила ухвали. Так він не «перевантажується».</small></div>
+    <div>🎓 Скіли — знання по категоріях<small>Близько 50 «шпаргалок» по категоріях справ: які норми, яка позиція ВС, де типові пастки, за що скасовує апеляція.</small></div>
+    <div>🧩 Заготовки абзаців<small>Майже 300 готових абзаців (роз'яснення права на оскарження, розподіл судових витрат…), які підставляються дослівно, без переписування.</small></div>
+    <div>🧠 Пам'ять<small>Картки «що ми вже з'ясували»: мої вказівки з датами, знайдені пастки, де що лежить. Нова розмова підхоплює досвід попередніх.</small></div>
+  </div>
+  <div class="good"><b>✅ Як це росте</b>Кожна моя правка «ми так не пишемо» стає рядком у правилах. Помилка, за яку раз скасували, більше не повторюється.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">4</span>Підключення: руки помічника</h2>
+  <p>Сам Claude бачить лише файли. Щоб він умів більше, до нього підключено дві програми-посередники (для цікавих — вони називаються <i>Оболонь</i> і <i>Практикант</i>, їх зробив для мене розробник):</p>
+  <ul>
+    <li>📚 <b>Закони</b> — тексти актів у потрібній редакції на потрібну дату, а не «як запам'ятала модель».</li>
+    <li>⚖️ <b>Судова практика</b> — власна база рішень з ЄДРСР: пошук позицій ВС і перевірка, що процитована постанова справді існує і каже саме це.</li>
+    <li>🏛 <b>Електронний суд</b> — підтягує документи справи з кабінету.</li>
+    <li>📄 <b>Word</b> — створює документ за моїм бланком, а не «текст у чаті».</li>
+    <li>🔎 <b>Розпізнавання сканів</b> — через Google Cloud, усі документи справи стають текстом.</li>
+  </ul>
+  <div class="tip"><b>💡 Без цього теж можна</b>Урок 1 працює і без підключень: закони й практику можна давати файлами в теку справи. Підключення — це зручність і швидкість, а не обов'язкова умова.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Автоматика: що відбувається саме</h2>
+  <p>Невеликий «диспетчер» на комп'ютері щодня виконує задачі за розкладом. Пропустив (комп'ютер спав) — доганяє, щойно прокинувся.</p>
+  <table>
+    <tr><td>☀️ Зранку</td><td>Зведення: що надійшло в справи, у яких справах підходить строк, які засідання сьогодні — приходить мені в Telegram</td></tr>
+    <tr><td>📅 Щодня</td><td>Розклад засідань з сайту суду, нагадування «засідання за годину»</td></tr>
+    <tr><td>⚖️ Щотижня</td><td>Огляд свіжої практики ВС по моїх категоріях і перевірка, чи не змінилися закони</td></tr>
+    <tr><td>💾 Щовечора</td><td>Резервна копія всього важливого</td></tr>
+  </table>
+  <h3>Запобіжники</h3>
+  <ul>
+    <li>🔐 <b>«Замок» на справу.</b> Я часто працюю в кількох вікнах одночасно. Вікно, що взяло справу, ставить позначку — і сусіднє вже не візьме ту саму.</li>
+    <li>🔍 <b>Автоперевірка проєкту.</b> Щойно документ створено, програма перевіряє: незаповнені поля, заборонені звороти, нечинна редакція норми, чи існують процитовані постанови ВС.</li>
+  </ul>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>Один робочий день</h2>
+  <ol class="steps">
+    <li><b>07:55</b> — у телефоні зведення: нові позови, строки, засідання.</li>
+    <li>Відкриваю вікно і кажу: <i>«бери першу справу з черги»</i>. Він ставить замок, розпізнає всі документи, збирає справу в один пакет.</li>
+    <li>Читає правила жанру, знаходить норму на дату подій, практику ВС — і пише проєкт у Word за моїм бланком.</li>
+    <li>Сам перечитує проєкт очима апеляції, автоперевірка ловить формальні огріхи.</li>
+    <li>Проєкт і довідка «що перевірити» лягають у теку справи і в спільну теку помічниці.</li>
+    <li>Я читаю, правлю, підписую. Мої правки — в правила на майбутнє.</li>
+  </ol>
+</section>
+
+<section class="a4">
+  <h2><span class="n">7</span>З чого почати вам</h2>
+  <div class="grid">
+    <div class="tile t3"><div class="big">1</div><b>Тиждень 1</b><span>Встановити (урок 1), пройти п'ять вправ на розглянутій справі</span></div>
+    <div class="tile t4"><div class="big">2</div><b>Тиждень 2</b><span>Написати CLAUDE.md і покласти в теку 3–5 своїх найкращих рішень як зразки</span></div>
+    <div class="tile t5"><div class="big">3</div><b>Тиждень 3</b><span>Налаштувати розпізнавання сканів, завести теку на кожну справу</span></div>
+    <div class="tile t6"><div class="big">4</div><b>Далі</b><span>Кожну повторювану правку — у правила; частий жанр — окрема інструкція</span></div>
+  </div>
+  <div class="warn"><b>⚠️ Чого не робити</b>Не будувати все одразу і не довіряти без перевірки. Моя система — результат кількох місяців щоденних правок. Вона виросла з однієї теки й одного файлу правил.</div>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

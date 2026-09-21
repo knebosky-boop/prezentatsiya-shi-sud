@@ -1,0 +1,218 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 1 · Claude на вашому комп'ютері</title><meta name="description" content="Як поставити Claude Code і працювати з ним: покроково, для суддів, з нуля."><meta property="og:title" content="Урок 1 · Claude на вашому комп'ютері"><meta property="og:description" content="Як поставити Claude Code і працювати з ним: покроково, для суддів, з нуля."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+</style></head><body><header class="hero">
+  <span class="tag">📘 Урок 1 · для суддів · з нуля</span>
+  <h1>Claude на вашому комп'ютері: як поставити і як з ним працювати</h1>
+  <p>Без технічних знань. Одного вечора достатньо, щоб мати помічника, який читає матеріали справи і готує проєкти.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="klava.html">Урок 2: як влаштована система →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Що це таке</h2>
+  <p><b>Claude</b> — штучний інтелект від компанії Anthropic. У браузері це чат: ви копіюєте туди текст, він відповідає.</p>
+  <p><b>Claude Code</b> — той самий Claude, але встановлений у вас на комп'ютері. Різниця величезна: він <b>сам працює з файлами</b>. Відкриває PDF із матеріалами справи, читає позовну заяву, відзив, обвинувальний акт, створює Word-документ і кладе його в теку справи.</p>
+  <div class="grid">
+    <div class="tile t1"><div class="e">💬</div><b>Чат у браузері</b><span>Ви носите текст туди-сюди руками</span></div>
+    <div class="tile t3"><div class="e">🧑‍💼</div><b>Claude Code</b><span>Помічник сам бере матеріали з теки і кладе туди готовий проєкт</span></div>
+  </div>
+  <p>Слово «термінал» не має лякати: це просто вікно, куди ви пишете звичайною мовою — <i>«прочитай позов у теці і скажи, чого просить позивач»</i>.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Як воно працює — на пальцях</h2>
+  <div class="flow">
+    <div>🧠 Розум — на серверах Anthropic<small>Сама модель живе не у вас на комп'ютері. Коли Claude читає документ, текст документа відправляється їй на обробку.</small></div>
+    <div>🖐 Руки — у вас на комп'ютері<small>Програма Claude Code відкриває файли, створює документи, запускає дії — і щоразу питає вашого дозволу.</small></div>
+    <div>🗂 Стіл — «контекст»<small>Усе, що він прочитав у розмові, лежить у нього «на столі». Стіл не безрозмірний: завалили десятком справ — починає плутати. Тому <b>одна справа — одна розмова</b>.</small></div>
+    <div>📝 Пам'яті між розмовами немає<small>Нова розмова — чистий аркуш. Усе, що має пам'ятати завжди (хто ви, як пишете), кладете у файл CLAUDE.md (розділ 9).</small></div>
+  </div>
+  <div class="tip"><b>💡 Головне, що варто зрозуміти</b>Це не база даних і не пошуковик. Це дуже тямущий стажист: читає швидко, пише добре, але може впевнено помилитися. Тому ви ставите завдання і перевіряєте — як із живим помічником.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Що потрібно</h2>
+  <ul>
+    <li>💻 <b>Комп'ютер</b> — Mac або Windows.</li>
+    <li>💳 <b>Платна підписка Claude</b> на <a href="https://claude.ai">claude.ai</a>: <b>Pro</b> — щоб спробувати, <b>Max</b> — для щоденної роботи зі справами (більші ліміти). Безкоштовний план Claude Code не підтримує.</li>
+    <li>⏱ Вечір часу і ця інструкція.</li>
+  </ul>
+  <div class="tip"><b>💡 Є простіший вхід</b>Якщо термінал зовсім не ваше — поставте застосунок <b>Claude</b> з <a href="https://claude.ai/download">claude.ai/download</a>: там є вкладка <b>Code</b>, це той самий Claude Code у звичних вікнах. Усе нижче — як говорити, правила, безпека — діє так само.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Встановлення</h2>
+  <h3>🍏 На Mac</h3>
+  <ol class="steps">
+    <li>Натисніть <b>⌘ + Пробіл</b>, наберіть <b>Термінал</b> (або Terminal), Enter. Відкриється вікно з курсором.</li>
+    <li>Скопіюйте команду кнопкою праворуч, вставте у вікно (<b>⌘ + V</b>) і натисніть <b>Enter</b>:
+      <div class="cmd"><code>curl -fsSL https://claude.ai/install.sh | bash</code><button>Копіювати</button></div></li>
+    <li>Дочекайтеся кінця (хвилина-дві). <b>Закрийте Термінал і відкрийте знову.</b></li>
+  </ol>
+  <h3>🪟 На Windows</h3>
+  <ol class="steps">
+    <li><b>Пуск</b> → наберіть <b>PowerShell</b> → відкрийте.</li>
+    <li>Вставте й натисніть Enter:
+      <div class="cmd"><code>irm https://claude.ai/install.ps1 | iex</code><button>Копіювати</button></div></li>
+    <li>Закрийте й знову відкрийте PowerShell.</li>
+  </ol>
+  <div class="good"><b>✅ Перевірка</b>Наберіть <code class="i">claude --version</code> і Enter. З'явився номер версії — усе стоїть.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">5</span>Перший запуск</h2>
+  <ol class="steps">
+    <li><b>Заведіть робочу теку</b>, наприклад «Помічник» на робочому столі. Усередині — теки справ: <code class="i">Помічник/2-1234-26 аліменти/</code>, куди кладете PDF матеріалів.</li>
+    <li><b>Зайдіть у неї в Терміналі:</b> наберіть <code class="i">cd</code>, пробіл, <b>перетягніть теку мишкою</b> у вікно — шлях підставиться сам. Enter.</li>
+    <li>Запустіть:
+      <div class="cmd"><code>claude</code><button>Копіювати</button></div></li>
+    <li>Першого разу відкриється браузер — <b>увійдіть у свій акаунт Claude</b>. Повертаєтесь у Термінал — можна говорити.</li>
+  </ol>
+  <div class="tip"><b>💡 Помічник бачить лише ту теку, де його запустили</b>і все, що в ній. Це і зручно, і безпечно.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">6</span>Основи роботи: перші п'ять вправ</h2>
+  <p>Пройдіть їх по черзі на одній уже розглянутій справі — так відразу видно, де він влучив, а де ні.</p>
+  <div class="chat"><span class="u">1 · Огляд.</span> Подивись, що лежить у теці справи, і стисло скажи: хто сторони, предмет спору, чого просить позивач, які докази додано.</div>
+  <div class="chat"><span class="u">2 · Хронологія.</span> Склади хронологію подій за матеріалами з посиланням на документ і аркуш, звідки взято кожен факт.</div>
+  <div class="chat"><span class="u">3 · Перевірка позову.</span> Перевір позовну заяву на відповідність статтям 175–177 ЦПК. Чого бракує — список з посиланням на норму.</div>
+  <div class="chat"><span class="u">4 · Проєкт.</span> Склади проєкт ухвали про відкриття провадження у спрощеному порядку. Вимоги позивача — дослівно з прохальної частини. Збережи в теку справи як Word.</div>
+  <div class="chat"><span class="u">5 · Критика.</span> Тепер прочитай свій проєкт очима апеляції: де слабкі місця, що можуть скасувати?</div>
+  <h3>Прийоми, які працюють</h3>
+  <ul>
+    <li>🎯 <b>Кажіть, який потрібен результат</b>, а не як його робити.</li>
+    <li>📎 <b>Файли:</b> наберіть <code class="i">@</code> і почніть назву — він підкаже. Або перетягніть файл у вікно.</li>
+    <li>🖼 <b>Скриншот:</b> скопіюйте і вставте <b>Ctrl + V</b> (на Mac — саме Ctrl).</li>
+    <li>✋ <b>Пішов не туди</b> — <b>Esc</b>, він зупиниться. Поправте словами.</li>
+    <li>🔁 <b>Правте прямо:</b> «мотивування задовге, скороти вдвічі», «пиши як у моєму зразку в теці Зразки».</li>
+    <li>🗺 <b>Складне завдання</b> — спершу план: «розпиши, що зробиш, я погоджу».</li>
+    <li>🧹 <b>Справу закінчено</b> — <code class="i">/clear</code>, наступна з чистого аркуша.</li>
+  </ul>
+  <p><b>Дозволи.</b> Перед тим як змінити файл чи виконати дію, він показує, що саме робитиме, і питає: <b>Yes</b> / <b>Yes, and don't ask again</b> / <b>No</b>. Спочатку читайте і погоджуйтеся по одному.</p>
+</section>
+
+<section class="a4">
+  <h2><span class="n">7</span>Скани: як навчити його читати фото сторінок</h2>
+  <p>Більшість матеріалів справи — <b>скани</b>: у PDF лежать картинки сторінок, а не текст. Claude бачить картинки, але 200 сторінок фото — це повільно, дорого по лімітах і з помилками в цифрах.</p>
+  <p>Рішення — <b>розпізнавання тексту (OCR) через Google Cloud</b>. Google перетворює скан на текст, а Claude працює вже з текстом: швидко, точно, можна шукати по сумах і датах.</p>
+  <ol class="steps">
+    <li>Зайдіть на <a href="https://console.cloud.google.com">console.cloud.google.com</a> своїм Google-акаунтом, створіть <b>проєкт</b> і підключіть оплату (картка; новим акаунтам Google дає стартовий кредит).</li>
+    <li>Увімкніть сервіс <b>Document AI</b> і створіть у ньому процесор <b>OCR</b> (Document OCR).</li>
+    <li>Створіть <b>сервісний ключ</b> (Service account → Keys → JSON) і збережіть файл-ключ у себе на комп'ютері поза текою справ.</li>
+    <li>Скажіть Claude: <i>«Ось файл-ключ Google Document AI і ID процесора. Напиши мені інструмент, який розпізнає всі скановані PDF у теці справи і кладе поруч текстові файли»</i>. Він напише і налаштує сам — ви лише погоджуєте кроки.</li>
+  </ol>
+  <div class="tip"><b>💡 Скільки коштує</b>Копійки: орієнтовно кілька доларів за тисячі сторінок (актуальні ціни — на сторінці Document AI у Google). Помилитися в сумі чи даті, прочитавши скан «на око», коштує дорожче.</div>
+  <div class="warn"><b>⚠️ Правило</b>Розпізнається <b>все</b>, а не вибірково: пропущений документ — це пропущений доказ. І цифру в мотивуванні звіряйте з текстом документа, а не з пам'яттю помічника.</div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">8</span>Шпаргалка</h2>
+  <table>
+    <tr><td>Esc</td><td>Зупинити, що він робить зараз</td></tr>
+    <tr><td>Esc Esc</td><td>Повернутися до попереднього повідомлення</td></tr>
+    <tr><td>↑</td><td>Ваше попереднє повідомлення</td></tr>
+    <tr><td>Shift + Tab</td><td>Режим: звичайний → «правити без питань» → «лише план»</td></tr>
+    <tr><td>/clear</td><td>Нова розмова з чистого аркуша</td></tr>
+    <tr><td>/compact</td><td>Стиснути довгу розмову, щоб продовжити</td></tr>
+    <tr><td>/model</td><td>Обрати модель (для суду — найсильнішу)</td></tr>
+    <tr><td>/init</td><td>Створити файл інструкцій CLAUDE.md</td></tr>
+    <tr><td>/memory</td><td>Відкрити й поправити інструкції</td></tr>
+    <tr><td>/resume</td><td>Повернутися до минулої розмови</td></tr>
+    <tr><td>claude -c</td><td>Запустити і продовжити останню розмову</td></tr>
+    <tr><td>Ctrl + C двічі</td><td>Вийти</td></tr>
+  </table>
+</section>
+
+<section class="a2">
+  <h2><span class="n">9</span>CLAUDE.md — ваша інструкція помічнику</h2>
+  <p>Найважливіше в усьому уроці. <b>CLAUDE.md</b> — звичайний текстовий файл у робочій теці, який Claude перечитує <b>на початку кожної розмови</b>. Туди один раз пишете, хто ви і як працювати, — і не повторюєте щодня. Створити: команда <code class="i">/init</code> або просто «створи CLAUDE.md з такими правилами…».</p>
+  <div class="chat" style="white-space:pre-line;font-family:'SF Mono',Menlo,monospace;font-size:14px"># Хто я
+Суддя місцевого загального суду: цивільні, кримінальні справи, справи про адмінправопорушення.
+
+# Як працювати
+- Мова — українська, офіційно-діловий стиль.
+- Позовні вимоги й формулювання обвинувачення — ДОСЛІВНО, не скорочуй.
+- Кожна правова позиція ВС — з номером справи і датою. Не знайшов — скажи, не вигадуй.
+- Норму бери в редакції на дату спірних відносин (події) і пиши це прямо.
+- Моя вказівка суперечить практиці ВС чи процесу — скажи одразу, до того як віддаси проєкт.
+- Проєкт — чернетка. Поруч клади коротку довідку: що перевірити мені.</div>
+  <div class="tip"><b>💡 Правило живе і росте</b>Щоразу, коли поправляєте («ні, ми так не пишемо»), додавайте: <i>«і запиши це в CLAUDE.md»</i>. За місяць він пише, як ви.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">10</span>Безпека — обов'язково</h2>
+  <div class="warn"><b>⚠️ ШІ вміє впевнено вигадувати</b>Номери справ, дати постанов ВС, цитати, статті — <b>кожен реквізит перевіряйте в ЄДРСР і в чинному тексті закону</b>. Проєкт — чернетка, підписує суддя.</div>
+  <ul>
+    <li>🔒 <b>Персональні дані.</b> Не завантажуйте зайвого; дотримуйтесь правил вашого суду. Особливо обережно — неповнолітні, закриті засідання, кримінальні справи.</li>
+    <li>⚙️ На <a href="https://claude.ai/settings">claude.ai → Settings → Privacy</a> перевірте, що <b>ваші розмови не використовуються для навчання моделі</b>.</li>
+    <li>🚫 Не вмикайте «роби все без дозволу», поки не розумієте, що він робить.</li>
+    <li>📁 Запускайте в робочій теці, а не в корені диска.</li>
+  </ul>
+</section>
+
+<section class="a5">
+  <h2><span class="n">11</span>Якщо щось не працює</h2>
+  <table>
+    <tr><td>command not found</td><td>Закрийте й відкрийте Термінал. Не допомогло — повторіть встановлення.</td></tr>
+    <tr><td>Mac питає доступ до «Документів»</td><td>«Дозволити» — інакше він не бачить файли.</td></tr>
+    <tr><td>Не впізнає акаунт</td><td>Наберіть <code class="i">/login</code>.</td></tr>
+    <tr><td>«Ліміт вичерпано»</td><td>Ліміт підписки на кілька годин. Почекайте або перейдіть на Max.</td></tr>
+    <tr><td>Повільний і «забудькуватий»</td><td>Розмова задовга: <code class="i">/clear</code>.</td></tr>
+  </table>
+  <div class="good"><b>🙋 Питайте його самого</b>«Як мені зробити, щоб ти…» — Claude Code добре пояснює сам себе і сам налаштовує себе.</div>
+</section>
+
+<p class="foot">Підготувала Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>
