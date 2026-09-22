@@ -1,0 +1,123 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 15 · «Не працює»: типові збої</title><meta name="description" content="Дванадцять типових збоїв, Windows, оновлення, загублений ноутбук, як спитати в групі."><meta property="og:title" content="Урок 15 · «Не працює»: типові збої"><meta property="og:description" content="Дванадцять типових збоїв, Windows, оновлення, загублений ноутбук, як спитати в групі."><meta property="og:type" content="article"><meta name="copyright" content="© Катерина Ремез, 2026. Інтелектуальна власність авторки. Теоретичний, навчальний матеріал.">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">🛠 Урок 15 · швидка допомога</span>
+  <h1>«Не працює»: типові збої і що з ними робити</h1>
+  <p>Дев'ять із десяти проблем — одні й ті самі. Ось вони, з відповіддю на кожну, і окремо: Windows, оновлення, загублений ноутбук і як правильно спитати в групі.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="zasidannya.html">← Урок 14</a><a href="dribnytsi.html">Урок 16: дрібниці →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Перше правило</h2>
+  <p><b>Прочитайте повідомлення.</b> Не червоне «щось зламалось», а текст. У дев'яти випадках із десяти там написано, що робити: «ліміт до 14:10», «файл не знайдено: перевірте шлях», «немає доступу до теки». Друге правило: <b>спитайте його самого</b>: «що щойно сталося і що мені зробити?» — він добре пояснює власні помилки.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Типові збої</h2>
+  <ol class="steps">
+    <li><b>«command not found: claude».</b> Закрийте термінал, відкрийте знову. Не допомогло — повторіть встановлення з уроку 1. На Windows — перевірте, що відкрили саме PowerShell, а не старий «Командний рядок».</li>
+    <li><b>Мовчить, курсор крутиться.</b> Чекайте до хвилини: довгий файл читається довго. Довше — <b>Esc</b> зупиняє поточну дію. Зовсім завис — <b>Ctrl+C</b> двічі і запустити знову; розмову повертає <code class="i">claude --continue</code>.</li>
+    <li><b>«Ви досягли ліміту».</b> Урок 9. У повідомленні є час скидання. Не перезапускайте — це не допоможе, а розмову збереже.</li>
+    <li><b>«Не бачу файл».</b> Ви запустили його не в тій теці. <code class="i">/exit</code>, зайти в теку справи (<code class="i">cd</code> + перетягнути теку), запустити знову. Або назвіть файл через <b>@</b> — він підкаже.</li>
+    <li><b>Скан «порожній».</b> Це картинка без текстового шару — урок 4, розпізнавання. Він і сам скаже: «це скан без тексту».</li>
+    <li><b>Послався на постанову, якої немає.</b> Урок 5, розділ 7. Промпт-перевірка з уроку 11 (розділ 5). Це не збій, це властивість: перевіряти треба завжди.</li>
+    <li><b>Після /clear «усе забув».</b> Так і має бути: нова розмова — чистий аркуш. Те, що має пам'ятати завжди, живе в CLAUDE.md (урок 3), а не в розмові.</li>
+    <li><b>Став повільним і дорогим.</b> Розмова роздулася. <code class="i">/context</code> покаже, скільки; <code class="i">/clear</code> вилікує. Здали документ — новe вікно.</li>
+    <li><b>«Учора працювало, сьогодні інакше».</b> Він оновлюється сам. <code class="i">claude --version</code> покаже версію; спитайте: «що змінилося в цій версії і чи стосується моїх правил?» Поведінку повертає уточнення правил у CLAUDE.md, не відкат.</li>
+    <li><b>Питає дозвіл на кожну дрібницю.</b> Так задумано (урок 6). Набридло для читання файлів — «Yes, and don't ask again» саме для читання, не для всього.</li>
+    <li><b>Записав файл не туди.</b> Спитайте «куди ти записав?» — він назве шлях. Далі: «перенеси в теку справи і надалі пиши лише туди» → у CLAUDE.md.</li>
+    <li><b>Пише російською / канцеляритом / «таким чином».</b> Правило в CLAUDE.md і промпт-перевірка мови (урок 11). Один раз поправити — далі ловить сам.</li>
+  </ol>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Windows: окремі граблі</h2>
+  <ul>
+    <li>Термінал — <b>PowerShell</b> (пошук у меню «Пуск»). Команди ті самі: <code class="i">cd</code>, <code class="i">claude</code>.</li>
+    <li>Шляхи з пробілами й кирилицею — у лапках: <code class="i">cd "C:\Справи\160-1234-26"</code>. Перетягування теки у вікно працює і тут.</li>
+    <li>Антивірус іноді блокує перший запуск. Дозвольте у вікні, що з'явиться, або спитайте адміністратора суду, якщо комп'ютер службовий.</li>
+    <li>Автозапуск програм (урок 7, 8) — через «Планувальник завдань»; помічник налаштує сам, попросіть «на Windows».</li>
+  </ul>
+  <div class="warn"><b>⚠️ Чесно</b>Кроки для Windows в уроках 1 і 4 написані за документацією, а не перевірені на живій машині. Якщо ви на Windows і застрягли — напишіть у групу, де саме. Це найцінніший звіт, який зараз можна зробити для курсу.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Загубили ноутбук або телефон із залогіненим акаунтом</h2>
+  <ol class="steps">
+    <li>З будь-якого пристрою: claude.ai → Settings → Security → <b>вийти з усіх пристроїв</b>. Зробіть це першим, до всього іншого.</li>
+    <li>Змінити пароль акаунта Claude. Увімкнути двофакторний вхід, якщо ще не.</li>
+    <li>Якщо був увімкнений Remote Control (урок 8) — після виходу з пристроїв він теж утратить доступ. Перевірте в застосунку на телефоні, що сесій із комп'ютера не видно.</li>
+    <li>Ноутбук: якщо диск не зашифровано, матеріали в теках доступні тому, хто його має. Це питання не до Claude, а до того, чи ввімкнено шифрування диска (FileVault на Mac, BitLocker на Windows). Увімкніть сьогодні, поки нічого не сталося.</li>
+    <li>Повідомити, кого належить у вашому суді. Це не питання курсу, це ваша посадова інструкція.</li>
+  </ol>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Як спитати в групі, щоб відповіли за хвилину</h2>
+  <ul>
+    <li><b>Що робили</b> (одне речення) і <b>що очікували</b>.</li>
+    <li><b>Текст повідомлення дослівно</b> — скопійований, не переказаний. Без матеріалів справи, прізвищ і номерів справ у роботі.</li>
+    <li><b>Mac чи Windows</b>, версія: <code class="i">claude --version</code>.</li>
+    <li>Що вже пробували.</li>
+  </ul>
+  <p>Бот у групі знає всі уроки і відповість першим із технічного. Правові питання — до Катерини Ігорівни, бот сам про це нагадає.</p>
+  <div class="good"><b>✅ Домашнє</b>Перевірити, чи зашифровано диск ноутбука, і чи ввімкнено двофакторний вхід у Claude. Обидві речі — по 5 хвилин, обидві рятують.</div>
+</section>
+
+<p class="foot">© Катерина Ремез, 2026. Усі матеріали курсу — інтелектуальна власність авторки. Викладене має теоретичний, навчальний характер: це не інструкція для конкретних справ і не позиція суду.</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

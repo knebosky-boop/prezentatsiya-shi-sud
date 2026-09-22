@@ -1,0 +1,117 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 16 · Мова, два комп'ютери, диктування</title><meta name="description" content="Правила мови в CLAUDE.md, спільна тека дім–робота, голос замість набору, прийоми напам'ять."><meta property="og:title" content="Урок 16 · Мова, два комп'ютери, диктування"><meta property="og:description" content="Правила мови в CLAUDE.md, спільна тека дім–робота, голос замість набору, прийоми напам'ять."><meta property="og:type" content="article"><meta name="copyright" content="© Катерина Ремез, 2026. Інтелектуальна власність авторки. Теоретичний, навчальний матеріал.">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">✨ Урок 16 · дрібниці, що економлять день</span>
+  <h1>Мова, два комп'ютери, диктування — і кілька прийомів</h1>
+  <p>Чотири теми, кожна на 10 хвилин, які окремо не тягнуть на урок, а разом заощаджують годину на день.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="ne-pratsyuye.html">← Урок 15</a><a href="navchannya.html">Зміст →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Мова: щоб писав українською, а не «перекладом»</h2>
+  <p>Без правил він пише правильною, але прісною мовою з домішкою кальок. Три рядки в CLAUDE.md і одна перевірка на виході:</p>
+  <div class="cmd"><code># Мова
+- Український правопис у чинній редакції; орфографія й пунктуація — за ним, а не «як звикли».
+- Без русизмів і кальок: не «приймати участь», а «брати участь»; не «на протязі», а «протягом»; не «у відповідності до», а «відповідно до»; не «являється», а «є»; не «даний», а «цей».
+- Не писати «таким чином» — писати «отже». Не починати абзац з «Що стосується».
+- Офіційно-діловий стиль без канцеляриту: коротші речення, дієслова замість віддієслівних іменників, де можливо.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Перевір мову проєкту: русизми й кальки, канцелярит, узгодження відмінків, розділові знаки за правописом, «таким чином». Виправ у файлі, зміни виділи кольором, список — окремо.</code><button>Копіювати</button></div>
+  <p>Кожну кальку, яку ви помітили, — у список у CLAUDE.md. За місяць список стане вашим особистим стилістичним словником.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Два комп'ютери: дім і робота</h2>
+  <ul>
+    <li><b>Одна робоча тека</b> на хмарному диску, який у вас дозволений. На обох комп'ютерах вона однакова: справи, CLAUDE.md, довідники, зразки.</li>
+    <li><b>Claude Code ставиться на кожен</b> окремо (урок 1), вхід — той самий акаунт. Правила підхоплюються з теки автоматично: він читає CLAUDE.md звідти, де запущений.</li>
+    <li><b>Що не синхронізувати:</b> ключі й токени (урок 6) — вони лежать поза спільною текою, на кожному комп'ютері свої.</li>
+    <li><b>Перед виходом з роботи</b> — переконатися, що диск «догнав»: значок хмари без стрілочок. Відкрили вдома старий файл — саме тому.</li>
+    <li><b>Одна справа — один комп'ютер у момент часу.</b> Два вікна на двох машинах над одним файлом — конфлікт копій. Закінчили вдома — закрили вікно.</li>
+  </ul>
+  <div class="tip"><b>💡 Пам'ять помічника</b>Те, що він «пам'ятає між розмовами», живе у файлах у теці. Тека спільна — пам'ять спільна. Вдома він знає те саме, що на роботі.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Диктування: голос замість набору</h2>
+  <ul>
+    <li><b>Короткі прохання — вбудоване диктування.</b> Mac: двічі натиснути клавішу диктування (або Fn), говорити в термінал, як у будь-яке поле. Windows: <b>Win + H</b>. Українська підтримується в обох.</li>
+    <li><b>Довге — аудіофайлом.</b> Записали на телефон 10 хвилин міркувань по справі (диктофон), поклали файл у теку і:</li>
+  </ul>
+  <div class="cmd"><code>У теці є аудіозапис [назва]. Розпізнай його на цьому комп'ютері (без відправки в сторонні сервіси; якщо потрібно встановити програму розпізнавання — спершу скажи, яку і навіщо). Потім із тексту склади структурований конспект: тези по справі, доручення мені й помічникові, питання, які я собі поставила.</code><button>Копіювати</button></div>
+  <ul>
+    <li>Розпізнавання на комп'ютері працює швидше, ніж триває запис, і нічого нікуди не вивантажує. Він сам запропонує інструмент і поставить його з вашого дозволу.</li>
+    <li><b>Не диктувати чутливе в загальних місцях</b> — це правило не про техніку.</li>
+  </ul>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Прийоми, які варто знати напам'ять</h2>
+  <ul>
+    <li><b>@</b> + початок назви — підказка файла з теки.</li>
+    <li><b>Esc</b> — зупинити. Двічі Esc — повернутися на крок назад у розмові.</li>
+    <li><b>↑</b> — попереднє повідомлення, щоб поправити й надіслати знову.</li>
+    <li><code class="i">/rename назва</code> перед <code class="i">/clear</code> — щоб потім знайти розмову через <code class="i">/resume</code>.</li>
+    <li><code class="i">/context</code> — скільки місця в розмові й що його займає.</li>
+    <li><b>Shift+Tab</b> — режим плану: спершу пропонує, потім робить. Для великих задач.</li>
+    <li><b>«Спитай, якщо не впевнений»</b> у кінці прохання — і він питатиме замість вгадувати.</li>
+  </ul>
+  <div class="good"><b>✅ Домашнє</b>Три рядки про мову в CLAUDE.md і одна перевірка мови на готовому проєкті. Хто працює на двох комп'ютерах — спільна тека, і перевірити вдома, що CLAUDE.md той самий. У групу — одну кальку, яку він у вас упіймав.</div>
+</section>
+
+<p class="foot">© Катерина Ремез, 2026. Усі матеріали курсу — інтелектуальна власність авторки. Викладене має теоретичний, навчальний характер: це не інструкція для конкретних справ і не позиція суду.</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

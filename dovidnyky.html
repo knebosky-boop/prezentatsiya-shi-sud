@@ -1,0 +1,126 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 12 · Довідники за категоріями</title><meta name="description" content="Один файл на категорію: норми, позиції ВС, чекліст, типові помилки, каркас — і як зробити його за вечір."><meta property="og:title" content="Урок 12 · Довідники за категоріями"><meta property="og:description" content="Один файл на категорію: норми, позиції ВС, чекліст, типові помилки, каркас — і як зробити його за вечір."><meta property="og:type" content="article"><meta name="copyright" content="© Катерина Ремез, 2026. Інтелектуальна власність авторки. Теоретичний, навчальний матеріал.">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">📚 Урок 12 · система</span>
+  <h1>Довідники за категоріями: щоб не вчити його щоразу</h1>
+  <p>CLAUDE.md каже, як ви пишете. Довідник каже, що ви знаєте про категорію: норми, позиції, чекліст, типові помилки. Один довідник — один вечір, і аліменти, ДТП чи стаття 130 більше не пояснюються з нуля.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="prompty.html">← Урок 11</a><a href="pomichnytsia.html">Урок 13: помічник і секретар →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Навіщо</h2>
+  <p>Через місяць роботи ви помітите: у кожній справі про аліменти помічник знову шукає ті самі норми, знову знаходить (або не знаходить) ті самі постанови ВС, знову робить ту саму помилку, яку ви вже виправляли. Правила в CLAUDE.md не допомагають — там про стиль, а не про категорію.</p>
+  <p><b>Довідник</b> — це один текстовий файл на категорію справ, який він читає перед тим, як писати проєкт саме в цій категорії. Це ваш конспект по темі, написаний так, щоб його читала і людина, і помічник.</p>
+  <div class="tip"><b>💡 З досвіду</b>Кілька десятків довідників покривають майже весь потік справ. Найбільше користі дали не «складні», а масові категорії: там, де десять однакових справ на місяць.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Що всередині</h2>
+  <p>Шість розділів, не більше 3–5 сторінок. Довший довідник він читає гірше, не краще.</p>
+  <ol class="steps">
+    <li><b>Норми.</b> Статті, які застосовуються, з датами редакцій: «ст. 182 СК у редакції з 08.07.2017». Якщо норма змінювалася у важливий період — обидві редакції і дата межі.</li>
+    <li><b>Позиції Верховного Суду.</b> Номер справи, дата, одне речення «про що». Тільки перевірені вами. Відступи від позицій — окремо, з датою.</li>
+    <li><b>Чекліст фактів.</b> Що має бути встановлено, щоб задовольнити: доходи, потреби дитини, розмір, з якого моменту. Що — щоб відмовити.</li>
+    <li><b>Типові помилки апеляції.</b> За що скасовують саме в цій категорії у вашому регіоні. Три-п'ять пунктів.</li>
+    <li><b>Каркас документа.</b> Порядок мотивування, який спрацював у ваших рішеннях: що після чого.</li>
+    <li><b>Заборонене.</b> Звороти, аргументи й помилки, яких у цій категорії не повторюємо.</li>
+  </ol>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Зробити за вечір</h2>
+  <p>Покладіть у теку «Довідники/Аліменти/» п'ять своїх рішень з цієї категорії (ЄДРСР-версії, без прізвищ) і три-п'ять постанов ВС, які ви вже знаєте. Запустіть помічника в цій теці:</p>
+  <div class="cmd"><code>Склади довідник категорії «[стягнення аліментів на дитину]» за моїми рішеннями і постановами ВС у цій теці. Шість розділів: норми з датами редакцій; позиції ВС — лише ті, що є в теці, номер + дата + одне речення; чекліст фактів для задоволення і для відмови; типові помилки, які видно з постанов; каркас мотивування, як у моїх рішеннях; заборонені звороти. До 4 сторінок. Збережи як Довідники/[Аліменти].md. Чого не знайшов у теці — напиши в кінці окремим списком, не додумуй.</code><button>Копіювати</button></div>
+  <p>Прочитайте. Викресліть, що не так. Допишіть, що знаєте ви, а він — ні. Це і є ваша година роботи: не написати, а <b>звірити</b>.</p>
+  <div class="warn"><b>⚠️ Головна пастка</b>Довідник із неперевіреною позицією ВС — гірше, ніж без довідника: помилка тепер повторюється в кожному проєкті категорії. Кожен номер справи в довіднику — ваша особиста перевірка в реєстрі. Один раз.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Щоб він його читав</h2>
+  <p>Один рядок у CLAUDE.md:</p>
+  <div class="cmd"><code>Перед тим як писати проєкт у справі, визнач категорію і прочитай відповідний файл у теці «Довідники/». Якщо довідника немає — скажи мені про це до початку роботи.</code><button>Копіювати</button></div>
+  <p>Усе. Відтепер він сам відкриває довідник на початку справи. Перевірити легко: спитайте «який довідник ти прочитав?»</p>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Жити з довідником</h2>
+  <ul>
+    <li><b>Правка → у довідник.</b> Як із CLAUDE.md (урок 3), тільки для категорії: «це помилка по суті, запиши в довідник Аліменти, розділ „типові помилки“».</li>
+    <li><b>Раз на квартал — ревізія норм.</b> Промпт нижче. Кодекси міняються тихо.</li>
+    <li><b>Нова постанова ВС</b> у категорії — одразу в довідник, з датою. Стара, від якої відступили, — не видаляти, а позначити «відступ: справа №…, дата».</li>
+    <li><b>Не роздувати.</b> Виріс за 5 сторінок — ділити на дві категорії або різати.</li>
+  </ul>
+  <div class="cmd"><code>Перевір усі норми в довіднику [Аліменти]: чи чинні статті в названих редакціях, чи були зміни після [дата останньої ревізії]. Кожну зміну — окремим рядком з датою й суттю. Довідник сам не правити — спершу покажи мені.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>З чого почати: категорії для загальної юрисдикції</h2>
+  <div class="grid">
+    <div class="tile t3"><div class="e">👨‍👧</div><b>Сімейні</b><span>Аліменти на дитину · розірвання шлюбу · визначення місця проживання дитини · поділ майна подружжя</span></div>
+    <div class="tile t4"><div class="e">📄</div><b>Договірні й боргові</b><span>Стягнення за кредитом · за розпискою · комунальні борги · судовий наказ</span></div>
+    <div class="tile t5"><div class="e">🚗</div><b>Шкода</b><span>ДТП без страховки · ДТП зі страховиком · моральна шкода</span></div>
+    <div class="tile t2"><div class="e">🏠</div><b>Житлові і спадкові</b><span>Визнання права власності · виселення · додатковий строк на спадщину</span></div>
+    <div class="tile t6"><div class="e">⚖️</div><b>Кримінальні</b><span>Крадіжка ч. 1–2 ст. 185 КК · угоди · запобіжні заходи · ст. 286 КК</span></div>
+    <div class="tile t1"><div class="e">🚔</div><b>КУпАП</b><span>Ст. 130 · ст. 173 · ст. 124 · строки за ст. 38</span></div>
+  </div>
+  <p>Перший довідник — на категорію, якої у вас найбільше. Не на найскладнішу.</p>
+  <div class="good"><b>✅ Домашнє</b>Один довідник на масову категорію: зроблений, звірений, підключений рядком у CLAUDE.md. Потім — проєкт у цій категорії до і після довідника. Різницю — у групу двома реченнями.</div>
+</section>
+
+<p class="foot">© Катерина Ремез, 2026. Усі матеріали курсу — інтелектуальна власність авторки. Викладене має теоретичний, навчальний характер: це не інструкція для конкретних справ і не позиція суду.</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

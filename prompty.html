@@ -1,0 +1,141 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 11 · Промпти за жанрами: скопіювати і працювати</title><meta name="description" content="Готові прохання під ухвали, рішення, вироки, постанови КУпАП, перевірку й керування."><meta property="og:title" content="Урок 11 · Промпти за жанрами: скопіювати і працювати"><meta property="og:description" content="Готові прохання під ухвали, рішення, вироки, постанови КУпАП, перевірку й керування."><meta property="og:type" content="article"><meta name="copyright" content="© Катерина Ремез, 2026. Інтелектуальна власність авторки. Теоретичний, навчальний матеріал.">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">📋 Урок 11 · бібліотека</span>
+  <h1>Промпти за жанрами: скопіювати і працювати</h1>
+  <p>Готові прохання під кожен типовий документ загальної юрисдикції: цивільні, кримінальні, адмінправопорушення. Кнопка «Копіювати», підставити своє в дужках — і в тому ж вікні, де лежить тека справи.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="pravyla.html">← Урок 3: правила</a><a href="dovidnyky.html">Урок 12: довідники →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">0</span>Як цим користуватися</h2>
+  <ul>
+    <li>Спершу — урок 3: без CLAUDE.md і теки «Зразки» будь-який промпт дає «середню температуру по лікарні».</li>
+    <li>Запускайте помічника <b>в теці справи</b>. Промпти нижче кажуть «у теці» — він розуміє, де він.</li>
+    <li>[У дужках] — ваше. Решту можна не чіпати.</li>
+    <li>Кожен промпт закінчується однаково: <b>проєкт у Word + довідка «що перевірити»</b>. Це не примха: довідка — місце, де він зізнається, чого не знайшов.</li>
+    <li>Номери статей — за чинними редакціями на вересень 2026. Кодекси міняються, тому в кожному промпті є «перевір, що стаття чинна».</li>
+  </ul>
+  <div class="tip"><b>💡 Одна фраза, яка працює завжди</b>«Не знайшов — так і скажи, не вигадуй». Додавайте її до всього, де є практика, реквізити або цифри.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">1</span>Спочатку — знайомство зі справою</h2>
+  <div class="cmd"><code>Прочитай усе в теці справи (скани — розпізнай). Скажи стисло: сторони, предмет, чого просить позивач — дослівно з прохальної частини, які докази додано, яких документів бракує. Окремо — що в теці є сканом без тексту.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Склади хронологію подій за матеріалами: дата — подія — документ і аркуш, звідки взято. Суперечності між документами — окремим списком.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Порахуй строки: [дата надходження / дата події]. Які процесуальні строки вже спливли, які спливають протягом 10 днів, з посиланням на статтю кодексу. Перевір, що редакція статті чинна.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">2</span>Цивільні справи</h2>
+  <p><b>Залишення без руху</b></p>
+  <div class="cmd"><code>Перевір позовну заяву на відповідність ст. 175–177 ЦПК. Якщо є недоліки — склади проєкт ухвали про залишення без руху за ст. 185 ЦПК: кожен недолік — окремим пунктом з посиланням на норму, строк для усунення — [5/10] днів. Судовий збір перевір за Законом «Про судовий збір» на дату подання. Проєкт — у Word у теку справи, поруч довідка, що мені перевірити.</code><button>Копіювати</button></div>
+  <p><b>Повернення заяви</b></p>
+  <div class="cmd"><code>Недоліки за ухвалою від [дата] не усунуто / усунуто частково: [що саме]. Склади проєкт ухвали про повернення позовної заяви за ст. 185 ЦПК з мотивуванням, чому недоліки не вважаються усунутими. Роз'яснення про право повторного звернення — обов'язково.</code><button>Копіювати</button></div>
+  <p><b>Відкриття провадження</b></p>
+  <div class="cmd"><code>Склади проєкт ухвали про відкриття провадження у [спрощеному / загальному] позовному провадженні за ст. 187 ЦПК. Вимоги — дослівно з прохальної частини, без скорочень. Обґрунтуй вибір форми провадження (ст. 274 ЦПК — перевір чинність). Строки для відзиву, відповіді на відзив, заперечень — за кодексом. Не пиши в резолютивній частині про стягнення судового збору. Проєкт у Word + довідка.</code><button>Копіювати</button></div>
+  <p><b>Забезпечення позову</b></p>
+  <div class="cmd"><code>Є заява про забезпечення позову: [суть]. Оціни за ст. 149–151 ЦПК: чи обґрунтовано, чи співмірно, чи належний захід. Склади два проєкти — про задоволення і про відмову — кожен із мотивуванням, і скажи, який ти вважаєш обґрунтованішим і чому. Рішення ухвалю я.</code><button>Копіювати</button></div>
+  <p><b>Підготовче засідання</b></p>
+  <div class="cmd"><code>Підготуй мене до підготовчого засідання (ст. 197 ЦПК): які клопотання висять, що витребувано і не надійшло, чи всі докази подано в строк, чи є підстави для закриття підготовчого і призначення розгляду по суті. Проєкт ухвали за результатами — у Word, з варіантами.</code><button>Копіювати</button></div>
+  <p><b>Судовий наказ</b></p>
+  <div class="cmd"><code>Заява про видачу судового наказу: перевір вимоги за ст. 161 і 163 ЦПК, підсудність, розмір вимог, документи. Якщо підстав для відмови (ст. 165) немає — проєкт судового наказу за ст. 168 ЦПК. Якщо є — проєкт ухвали про відмову з мотивуванням. Перевір чинність статей.</code><button>Копіювати</button></div>
+  <p><b>Заочне рішення</b></p>
+  <div class="cmd"><code>Відповідач належно повідомлений (перевір за матеріалами: [як саме]), не з'явився, відзиву немає, позивач не заперечує. Перевір умови ст. 280 ЦПК і склади проєкт заочного рішення за ст. 265 і 282 ЦПК. Доведеність кожної вимоги — за наявними доказами, а не за замовчуванням.</code><button>Копіювати</button></div>
+  <p><b>Рішення по суті</b></p>
+  <div class="cmd"><code>Склади проєкт рішення по суті за ст. 265 ЦПК. Норми — в редакції на дату спірних відносин, і напиши це прямо. Кожна позиція Верховного Суду — номер справи + дата; не знайшов — скажи. Оцінка кожного доказу — з посиланням на аркуш. Пиши за моїми зразками з теки «Зразки». Проєкт у Word + довідка: слабкі місця, що перевірити, де сумніваєшся.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">3</span>Кримінальні справи</h2>
+  <p><b>Підготовче засідання</b></p>
+  <div class="cmd"><code>Обвинувальний акт надійшов [дата]. Підготуй мене до підготовчого засідання за ст. 314–315 КПК: відповідність обвинувального акта ст. 291, підсудність, клопотання сторін, запобіжний захід і його строк, цивільний позов. Проєкт ухвали за результатами — у Word, з варіантами рішень за ч. 3 ст. 314.</code><button>Копіювати</button></div>
+  <p><b>Запобіжний захід</b></p>
+  <div class="cmd"><code>Клопотання про [обрання / продовження / зміну] запобіжного заходу: [який]. Перевір за ст. 177–178 і 194 КПК: обґрунтованість підозри, ризики — кожен з посиланням на доказ, чи можливий м'якший захід, строк. Проєкт ухвали — у Word, окремо для задоволення й відмови. Рішення — моє.</code><button>Копіювати</button></div>
+  <p><b>Вирок на підставі угоди</b></p>
+  <div class="cmd"><code>Угода про [визнання винуватості / примирення] від [дата]. Перевір за ст. 468–474 КПК: чи можливе укладення угоди в цій справі, чи добровільно, чи відповідає покарання санкції й закону, чи роз'яснено наслідки. Якщо підстав для відмови (ч. 7 ст. 474) немає — проєкт вироку за ст. 475 КПК. Якщо є — проєкт ухвали про відмову в затвердженні.</code><button>Копіювати</button></div>
+  <p><b>Вирок</b></p>
+  <div class="cmd"><code>Судовий розгляд завершено. Склади проєкт вироку за ст. 374 КПК: формулювання обвинувачення, визнаного доведеним, докази — кожен з оцінкою і аркушем, кваліфікація, обставини, що пом'якшують і обтяжують, мотиви призначення покарання з посиланням на ст. 65 КК, речові докази, процесуальні витрати, запобіжний захід до набрання законної сили. Норми КК — у редакції на дату вчинення діяння, і напиши це прямо. Проєкт у Word + довідка.</code><button>Копіювати</button></div>
+  <p><b>Ухвала</b></p>
+  <div class="cmd"><code>Склади проєкт ухвали про [предмет] за ст. 372 КПК: вступна, мотивувальна, резолютивна частини, строк і порядок оскарження. Посилання на норми — з перевіркою чинності.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">4</span>Адміністративні правопорушення</h2>
+  <div class="cmd"><code>Протокол за ст. [130 / інша] КУпАП. Перевір: складено уповноваженою особою, роз'яснено права за ст. 268, обставини за ст. 280 з'ясовано, строк накладення стягнення за ст. 38 (порахуй дні), докази — кожен окремо. Склади проєкт постанови за ст. 283–284 КУпАП; якщо є підстави для закриття — проєкт постанови про закриття з мотивуванням.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Особа заперечує [що саме]. Оціни докази з обох сторін і скажи чесно: чи достатньо їх для висновку про вину, де слабкі місця протоколу. Проєкти — на обидва варіанти.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">5</span>Перевірка — до підпису</h2>
+  <div class="cmd"><code>Прочитай свій проєкт очима апеляційного суду: що можуть скасувати, чого бракує в мотивуванні, де підмінено норму або неточно передано позицію ВС. Список — за спаданням ризику.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Звір кожну цифру, дату, суму, прізвище й номер у проєкті з текстом документів у теці. Кожну розбіжність — окремим рядком: що в проєкті, що в документі, аркуш.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Перевір кожну постанову Верховного Суду, на яку ти послався: номер справи, дата, чи є такий текст у реєстрі, чи саме про це вона. Не підтверджується — прибери і скажи мені.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Перевір мову: русизми, канцелярит, «таким чином», узгодження відмінків, правопис. Виправ у файлі і покажи список змін.</code><button>Копіювати</button></div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">6</span>Керування</h2>
+  <div class="cmd"><code>Розпиши план, що зробиш, — я погоджу, і лише потім роби.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Ні, ми так не пишемо: [що саме]. Виправ і запиши це правило в CLAUDE.md.</code><button>Копіювати</button></div>
+  <div class="cmd"><code>Що ти зараз робиш і скільки ще? Якщо застряг — скажи, на чому.</code><button>Копіювати</button></div>
+  <div class="good"><b>✅ Домашнє</b>Оберіть три промпти під свої найчастіші документи, перевірте їх на закритій справі і допишіть у свій файл «Перші промпти» так, як вони запрацювали у вас. У групу — один промпт, який вийшов кращим за мій.</div>
+</section>
+
+<p class="foot">© Катерина Ремез, 2026. Усі матеріали курсу — інтелектуальна власність авторки. Викладене має теоретичний, навчальний характер: це не інструкція для конкретних справ і не позиція суду.</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>
