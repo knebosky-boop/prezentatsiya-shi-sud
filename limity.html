@@ -1,0 +1,181 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 9 · Ліміти й тарифи: скільки Claude «влазить» у підписку</title><meta name="description" content="П'ятигодинне вікно, тижнева межа, Free/Pro/Max, кредити, ціна одного документа і дев'ять звичок, що бережуть ліміт."><meta property="og:title" content="Урок 9 · Ліміти й тарифи: скільки Claude «влазить» у підписку"><meta property="og:description" content="П'ятигодинне вікно, тижнева межа, Free/Pro/Max, кредити, ціна одного документа і дев'ять звичок, що бережуть ліміт."><meta property="og:type" content="article"><meta name="copyright" content="© Катерина Ремез, 2026. Інтелектуальна власність авторки. Теоретичний, навчальний матеріал.">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">⏱ Урок 9 · про гроші й межі</span>
+  <h1>Ліміти й тарифи: скільки Claude «влазить» у підписку</h1>
+  <p>Чому вранці він працює, а о третій каже «ліміт», що таке п'ятигодинне вікно і тижнева межа, чим Pro відрізняється від Max, коли варто вмикати кредити — і як не спалити підписку на дурниці.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="remote.html">← Урок 8</a><a href="bezpeka.html">Урок 6: безпека →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Три слова, які треба знати</h2>
+  <div class="grid">
+    <div class="tile t3"><div class="e">⏱</div><b>Сесія — 5 годин</b><span>Ковзне вікно: від першого повідомлення рахується п'ять годин, потім лічильник обнуляється. Це основна межа</span></div>
+    <div class="tile t4"><div class="e">📅</div><b>Тиждень</b><span>На платних планах поверх сесій є тижнева межа. Скидається у фіксований день і час, закріплений за вашим акаунтом</span></div>
+    <div class="tile t5"><div class="e">💳</div><b>Кредити</b><span>Уперлися в межу — можна продовжити за окремі гроші, за звичайними цінами API. Вмикається лише вручну</span></div>
+  </div>
+  <div class="tip"><b>💡 Головне</b>Чат на claude.ai і Claude Code у терміналі — <b>одна кишеня</b>. Усе, що ви робите в обох, списується з тих самих лімітів. Витратили в терміналі — у чаті теж порожньо.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Що саме рахується</h2>
+  <p>Не кількість повідомлень. Рахується <b>обсяг тексту, який модель прочитала і написала</b> — у «токенах», приблизно по три-чотири букви на токен. Звідси чотири наслідки, які треба відчути на пальцях:</p>
+  <ol class="steps">
+    <li><b>Кожне звернення перечитує всю розмову.</b> Він не пам'ятає, а перечитує. Тому десяте питання в довгій розмові коштує більше, ніж перше, а сота дія — більше, ніж десята. Довга розмова дорожчає не рівно, а <b>з розгоном</b>.</li>
+    <li><b>Кожна його дія — це теж звернення.</b> Прочитав файл, запустив розпізнавання, записав документ — це не одне «повідомлення», а десятки звернень, і кожне тягне за собою всю розмову.</li>
+    <li><b>Модель важить.</b> Найсильніші моделі дорожчі за ті самі слова. Розмірковування («effort») додає невидимих токенів: на складній справі це виправдано, на «перейменуй файл» — ні.</li>
+    <li><b>Картинки дорожчі за текст.</b> Сторінка скана, вставлена картинкою, — приблизно півтори тисячі токенів і лишається в розмові назавжди. Той самий документ після розпізнавання (урок 4) — текст, який читається у рази дешевше.</li>
+  </ol>
+  <div class="warn"><b>⚠️ На чому не економимо</b>Розпізнавання всіх документів справи, перевірка кожного реквізиту практики, звірка норми з першоджерелом. Ціна пропущеної помилки в ухвалі вища за ціну будь-якого звернення. Економити треба на кількості <i>зайвих</i> звернень, а не на прочитаному.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>П'ятигодинне вікно</h2>
+  <ul>
+    <li>Відлік починається з <b>першого повідомлення</b>, а не з опівночі. Написали о 9:10 — вікно до 14:10, і о 14:10 у вас знову повна сесія.</li>
+    <li>Скільки «влазить» у вікно — залежить від плану: Pro дає щонайменше <b>у п'ять разів більше</b> за безкоштовний, Max 5x — у п'ять разів більше за Pro, Max 20x — у двадцять.</li>
+    <li>Нічого не переноситься: не використали вікно — воно згоріло. Тому важке (розпізнати справу, повний проєкт) краще ставити на <b>початок</b> вікна, а не о 13:50.</li>
+    <li>Уперлися — він покаже, о котрій скидання. Можна просто зачекати; Claude Code уміє сам дочекатися і продовжити перервану роботу після скидання.</li>
+  </ul>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Тижнева межа</h2>
+  <ul>
+    <li>Є на всіх платних планах, поверх сесій. Пильнує, щоб п'ятигодинні вікна не крутили цілодобово.</li>
+    <li>Скидається <b>у фіксований день і час</b>, закріплений за акаунтом: не «через тиждень після першого повідомлення», а завжди, скажімо, у четвер о 10:00. Подивитися можна в <b>Settings → Usage</b>.</li>
+    <li>Спільна для всіх моделей. Повідомлення «ви досягли тижневого ліміту» — перемикання моделі не рятує.</li>
+    <li>А от «ви досягли ліміту Opus» — це <b>окрема</b> межа однієї моделі; перемкнулися на іншу (<code class="i">/model</code>) — і працюєте далі.</li>
+    <li>Найсильніша модель (Fable) на Pro і Max обмежена окремо: на неї можна витратити лише частину тижневого ліміту (на сторінці тарифів — половину). Для щоденних проєктів вистачає Opus.</li>
+  </ul>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Тарифні плани — і який для кого</h2>
+  <table class="mem" style="width:100%;border-collapse:collapse;font-size:15px">
+    <tr><th style="text-align:left;padding:6px 4px;border-bottom:2px solid #ccd">План</th><th style="text-align:left;padding:6px 4px;border-bottom:2px solid #ccd">Ціна</th><th style="text-align:left;padding:6px 4px;border-bottom:2px solid #ccd">Claude Code</th><th style="text-align:left;padding:6px 4px;border-bottom:2px solid #ccd">Кому</th></tr>
+    <tr><td style="padding:8px 4px;border-bottom:1px solid #dde"><b>Free</b></td><td style="padding:8px 4px;border-bottom:1px solid #dde">0</td><td style="padding:8px 4px;border-bottom:1px solid #dde">немає</td><td style="padding:8px 4px;border-bottom:1px solid #dde">Спробувати в чаті (урок 0). Для роботи з теками — ні</td></tr>
+    <tr><td style="padding:8px 4px;border-bottom:1px solid #dde"><b>Pro</b></td><td style="padding:8px 4px;border-bottom:1px solid #dde">20 $/міс або 17 $/міс при оплаті за рік</td><td style="padding:8px 4px;border-bottom:1px solid #dde">є</td><td style="padding:8px 4px;border-bottom:1px solid #dde">Ухвали, довідки, окремі проєкти. Повний проєкт по суті — орієнтовно 1–2 на тиждень</td></tr>
+    <tr><td style="padding:8px 4px;border-bottom:1px solid #dde"><b>Max 5x</b></td><td style="padding:8px 4px;border-bottom:1px solid #dde">100 $/міс</td><td style="padding:8px 4px;border-bottom:1px solid #dde">є, пріоритет у години пік</td><td style="padding:8px 4px;border-bottom:1px solid #dde">Щоденна робота: кілька проєктів на день, розпізнавання справ, автоматика</td></tr>
+    <tr><td style="padding:8px 4px"><b>Max 20x</b></td><td style="padding:8px 4px">200 $/міс</td><td style="padding:8px 4px">є, пріоритет</td><td style="padding:8px 4px">Потік: десятки проєктів на тиждень, кілька вікон паралельно, без думки про ліміт</td></tr>
+  </table>
+  <p style="margin-top:14px">Моделі на Pro і Max одні й ті самі: Haiku, Sonnet, Opus і Fable з обмеженням. Різниця між планами — <b>лише в обсязі</b>, а не в якості відповідей. Правила з CLAUDE.md, теки, розпізнавання, автоматика — усе працює однаково.</p>
+  <div class="tip"><b>💡 Як обирати</b>Почніть з Pro на місяць. Якщо повідомлення про ліміт з'являється щодня і заважає — це сигнал на Max 5x. Якщо на Max 5x усе одно тісно — 20x. Навпаки теж працює: план можна знизити будь-коли.</div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>Скільки коштує один документ — орієнтири</h2>
+  <p>За замірами на реальних справах: <b>повний проєкт рішення по суті</b> з розпізнаванням матеріалів, перевіркою практики й довідкою — це понад <b>сто звернень</b> до моделі, а розмова на піку тримає кілька сотень тисяч токенів. У списковых цінах API це <b>десятки доларів</b> за документ. Підписка ці гроші не списує, вона списує «обсяг» — саме тому один такий проєкт помітно з'їдає п'ятигодинне вікно Pro.</p>
+  <ul>
+    <li>З чого складається ціна: приблизно <b>половина — перечитування розмови</b>, третина — запис у кеш, і лише п'ята частина — текст, який він написав.</li>
+    <li>Тому шаблони й «коротші відповіді» майже нічого не економлять: вони ріжуть найдешевшу статтю. Економить <b>коротка розмова</b>: одна справа — одне вікно.</li>
+    <li>Ухвала про відкриття, довідка, лист — у рази дешевші за рішення по суті: менше матеріалів, менше дій.</li>
+  </ul>
+</section>
+
+<section class="a5">
+  <h2><span class="n">7</span>Кредити: коли ліміт закінчився, а справа — ні</h2>
+  <ol class="steps">
+    <li>У браузері: <b>Settings → Usage → Usage credits → Enable</b>. Прив'язати картку.</li>
+    <li>Поставити <b>місячний ліміт витрат</b> (наприклад, 20 $). Без нього стоїть «unlimited» — не треба.</li>
+    <li>Кредити списуються <b>лише після</b> того, як вичерпано включений обсяг. Поки підписка тягне — картка не чіпається.</li>
+    <li>Ціна — звичайні ціни API за токени. Довга розмова на кредитах дорожчає ще й тому, що кеш живе п'ять хвилин замість години.</li>
+    <li>Найсильніша модель на кредитах щоразу питає згоди; можна відмовитися й продовжити на звичайній.</li>
+    <li>Вимкнути можна будь-коли там само. У терміналі — команда <code class="i">/usage-credits</code> відкриває ту саму сторінку.</li>
+  </ol>
+  <div class="warn"><b>⚠️ Чесно про кредити</b>Це не «дешевше, ніж підвищити план». Якщо вмикаєте їх щотижня — вам потрібен наступний план, це вийде дешевше. Кредити — на аврал, не на щодень.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">8</span>Як дивитися, скільки лишилося</h2>
+  <ul>
+    <li><b>У браузері:</b> Settings → Usage. Дві смужки — сесія і тиждень — і час наступного скидання кожної.</li>
+    <li><b>У терміналі:</b> <code class="i">/usage</code>. Ті самі смужки плюс розклад, що саме з'їло ліміт за день чи тиждень (клавіші <b>d</b> і <b>w</b>): довгі розмови, розпізнавання, автоматика.</li>
+    <li><b>Що зараз у розмові:</b> <code class="i">/context</code> — скільки місця займають правила, файли, історія. Побачили, що розмова роздулася, — час на <code class="i">/clear</code>.</li>
+    <li><b>Повідомлення про ліміт</b> завжди називає час скидання. Прочитайте його, перш ніж щось перемикати.</li>
+  </ul>
+</section>
+
+<section class="a4">
+  <h2><span class="n">9</span>Дев'ять звичок, які бережуть ліміт</h2>
+  <ol class="steps">
+    <li><b>Одна справа — одна розмова.</b> Закінчили — <code class="i">/clear</code>. Стара розмова дорожчає з кожним питанням.</li>
+    <li><b>Не лишайте вікно висіти.</b> Після паузи понад годину перше повідомлення перечитує все з нуля. Здали документ — закрийте.</li>
+    <li><b>Скани — текстом,</b> не картинками (урок 4).</li>
+    <li><b>Конкретне прохання.</b> «Перевір строк на апеляцію в ухвалі від 12.09» дешевше за «подивись, чи все добре».</li>
+    <li><b>Модель за задачею.</b> Проєкт по суті — сильна модель; перейменувати теку, скласти список — легша.</li>
+    <li><b>Важке — на початок вікна.</b> Розпізнавання справи о 9:00, а не за десять хвилин до скидання.</li>
+    <li><b>Спершу план, потім робота</b> на великих задачах: переробляти з середини дорожче, ніж погодити напрямок.</li>
+    <li><b>Правила — короткі.</b> CLAUDE.md читається на старті кожної розмови. Рідкісне — в окремі файли, які він відкриє за потреби.</li>
+    <li><b>Автоматика теж їсть.</b> Ранкове зведення (урок 7) — копійки, але сто таких задач — уже ні. Дивіться <code class="i">/usage</code> → тиждень.</li>
+  </ol>
+  <div class="good"><b>✅ Що НЕ робити</b>Не рвати роботу над справою навпіл «щоб зекономити» і не пропускати перевірку реквізитів. Підписка на це і розрахована. Економимо на зайвому, не на потрібному.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">10</span>Вправа і домашнє</h2>
+  <ol class="steps">
+    <li>Відкрийте Settings → Usage. Запишіть, у який день і о котрій скидається ваш тиждень.</li>
+    <li>Зробіть будь-який проєкт із уроку 5 і одразу після нього — <code class="i">/usage</code>. Подивіться, скільки відсотків сесії він з'їв. Це ваша «ціна документа».</li>
+    <li>Наступного дня зробіть те саме, але після <code class="i">/clear</code> і в свіжому вікні. Порівняйте.</li>
+  </ol>
+  <div class="good"><b>✅ Напишіть у групу</b>Ваш план, «ціна документа» у відсотках сесії і чи впиралися в ліміт за тиждень. З цього ми зрозуміємо, який план реально потрібен судді загальної юрисдикції.</div>
+</section>
+
+<p class="foot">© Катерина Ремез, 2026. Усі матеріали курсу — інтелектуальна власність авторки. Викладене має теоретичний, навчальний характер: це не інструкція для конкретних справ і не позиція суду. Ціни й ліміти — станом на вересень 2026 за офіційними сторінками claude.com; перевіряйте актуальні.</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>
