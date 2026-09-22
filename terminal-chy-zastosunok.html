@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Термінал чи застосунок — чому ми йдемо через термінал</title>
+<meta name="description" content="Claude Code у терміналі і той самий Claude Code у застосунку: пам'ять, функції, автоматика, страх чорного екрана. Чому курс іде через термінал.">
+<meta property="og:title" content="Термінал чи застосунок?">
+<meta property="og:description" content="Одна й та сама програма у двох обгортках. Що важить пам'ять, що лише термінал уміє, і чому застосунок легко додати потім.">
+<style>
+  :root{
+    --navy:#1b2a4a; --navy2:#243a63; --gold:#c9a227; --ink:#22293a;
+    --paper:#f7f5f0; --muted:#6b7280; --accent:#8b1e2d; --green:#2f6b3a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{font-family:Georgia,'Times New Roman',serif;background:#0e1526;color:var(--ink)}
+  .deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:calc(env(safe-area-inset-top) + 56px) 24px calc(env(safe-area-inset-bottom) + 52px);
+    background:var(--paper);position:relative;
+  }
+  .slide.dark{background:linear-gradient(150deg,var(--navy) 0%,var(--navy2) 100%);color:#f2efe6}
+  .kicker{font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  h1{font-size:clamp(28px,8.4vw,38px);line-height:1.14;font-weight:700}
+  h2{font-size:clamp(23px,6.8vw,30px);line-height:1.18;margin-bottom:22px;color:var(--navy)}
+  .dark h2{color:#f2efe6}
+  h2 .num{color:var(--gold);margin-right:10px}
+  .sub{font-size:17px;color:var(--muted);margin-top:18px;line-height:1.5}
+  .dark .sub{color:#c9cfdd}
+  ul.main{list-style:none;font-size:19px;line-height:1.4}
+  ul.main>li{padding:13px 0 13px 24px;position:relative;border-bottom:1px solid rgba(27,42,74,.12)}
+  ul.main>li:last-child{border-bottom:none}
+  ul.main>li::before{content:"—";position:absolute;left:0;color:var(--gold);font-weight:700}
+  ul.main.ok>li::before{content:"✓";color:var(--green)}
+  ul.main.no>li::before{content:"✗";color:var(--accent)}
+  .dark ul.main>li{border-color:rgba(255,255,255,.14)}
+  b{color:var(--navy)} .dark b{color:#ffd867}
+  .note{margin-top:22px;padding:14px 16px;background:rgba(201,162,39,.12);border-left:4px solid var(--gold);
+        font-size:16px;line-height:1.45}
+  .dark .note{background:rgba(255,255,255,.07);color:#e8e4d6}
+  .warn{border-left-color:var(--accent);background:rgba(139,30,45,.08)}
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:8px}
+  .step{counter-increment:st;display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(27,42,74,.12)}
+  .step:last-child{border-bottom:none}
+  .step::before{content:counter(st);flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);
+                display:flex;align-items:center;justify-content:center;font-family:Verdana,sans-serif;font-size:15px;font-weight:700}
+  .step div{font-size:18px;line-height:1.35}
+  .footer{position:absolute;left:24px;right:24px;bottom:calc(env(safe-area-inset-bottom) + 14px);
+          display:flex;justify-content:space-between;
+          font-family:Verdana,Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .dark .footer{color:#8f9ab5}
+  .quote{font-size:23px;line-height:1.4;font-style:italic;position:relative;padding-left:26px}
+  .quote::before{content:"«";position:absolute;left:0;top:-8px;font-size:50px;color:var(--gold);font-style:normal}
+  .tag{display:inline-block;font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+       background:var(--navy);color:#f2efe6;padding:4px 12px;border-radius:3px;margin-bottom:18px;align-self:flex-start}
+  .dark .tag{background:var(--gold);color:var(--navy)}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:10;
+          padding:calc(env(safe-area-inset-top) + 8px) 22px 8px;
+          display:flex;justify-content:space-between;align-items:center;
+          font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.06em;
+          color:#c9cfdd;background:linear-gradient(to bottom,rgba(14,21,38,.55),rgba(14,21,38,0));
+          pointer-events:none}
+  .topbar .counter{font-variant-numeric:tabular-nums;background:rgba(14,21,38,.55);color:#f2efe6;
+                   padding:3px 10px;border-radius:12px}
+  .swipe-hint{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 6px);left:50%;transform:translateX(-50%);
+        z-index:10;font-family:Verdana,sans-serif;font-size:10px;color:#9aa3b8;letter-spacing:.08em;
+        background:rgba(14,21,38,.55);padding:3px 12px;border-radius:12px;
+        transition:opacity .6s;pointer-events:none;white-space:nowrap}
+  .swipe-hint.gone{opacity:0}
+  /* три картки способів */
+  .ways{display:flex;flex-direction:column;gap:10px}
+  .way{padding:13px 14px;border-radius:8px;background:rgba(27,42,74,.06);border:1px solid rgba(27,42,74,.14)}
+  .way .t{font-family:Verdana,sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+  .way .d{font-size:16px;line-height:1.4}
+  .way.pick{background:rgba(201,162,39,.16);border-color:var(--gold)}
+  /* таблиця пам'яті */
+  .mem{width:100%;border-collapse:collapse;font-size:16px;margin-top:4px}
+  .mem th{font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 0;border-bottom:2px solid rgba(27,42,74,.2)}
+  .mem td{padding:11px 0;border-bottom:1px solid rgba(27,42,74,.12);vertical-align:top;line-height:1.35}
+  .mem td:last-child{text-align:right;white-space:nowrap;font-family:Verdana,sans-serif;font-size:15px;font-weight:700;color:var(--navy);padding-left:12px}
+  .mem tr.est td:last-child{color:var(--accent)}
+  .mem tr.big td:last-child{color:var(--accent)}
+  .small{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.45}
+  /* шпаргалка */
+  .cheat{display:flex;flex-direction:column;gap:8px}
+  .cheat div{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .cheat div:last-child{border-bottom:none}
+  .cheat code{font-family:Menlo,Consolas,monospace;font-size:15px;background:rgba(0,0,0,.35);color:#ffd867;padding:3px 8px;border-radius:4px;white-space:nowrap;flex:0 0 auto}
+  .cheat span{font-size:16px;line-height:1.35}
+  /* дві колонки на широкому екрані */
+  @media (min-width:700px){
+    .slide{padding-left:max(24px,calc(50vw - 330px));padding-right:max(24px,calc(50vw - 330px))}
+    .ways{flex-direction:row} .way{flex:1}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><span>Термінал чи застосунок</span><span class="counter" id="counter">1 / 11</span></div>
+<div class="swipe-hint" id="hint">гортайте вгору ↑ · на комп'ютері — стрілки</div>
+<div class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide dark">
+  <div class="kicker">Навчання для суддів · до уроку 1</div>
+  <h1>Термінал чи застосунок?</h1>
+  <div class="sub">Claude Code можна відкрити у «чорному вікні» або в звичному застосунку з кнопками. Це одна й та сама програма. Чому в курсі ми все одно йдемо через термінал.</div>
+  <div class="footer"><span>Катерина Ремез</span><span>вересень 2026</span></div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2><span class="num">01</span>Три способи говорити з Claude</h2>
+  <div class="ways">
+    <div class="way">
+      <div class="t">💬 Чат у браузері</div>
+      <div class="d">claude.ai. Копіюєте текст туди, відповідь — назад. Файли прикріплюєте руками. Для «спробувати» — так; для щоденної роботи — ні (урок 0).</div>
+    </div>
+    <div class="way">
+      <div class="t">🪟 Застосунок Claude, вкладка Code</div>
+      <div class="d">Той самий Claude Code у вікні з кнопками: вибір теки мишкою, кольорові зміни файлів, список розмов збоку.</div>
+    </div>
+    <div class="way pick">
+      <div class="t">⌨️ Термінал</div>
+      <div class="d">Той самий Claude Code у текстовому вікні. Пишете звичайною мовою — він читає теку справи, готує проєкт, питає дозволу.</div>
+    </div>
+  </div>
+  <div class="note">Застосунок і термінал — <b>одна програма у двох обгортках</b>. Якість проєкту, правила з CLAUDE.md, дозволи, підписка — однакові. Різниця в тому, скільки обгортка коштує комп'ютеру і що вона дозволяє.</div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <h2><span class="num">02</span>Скільки це коштує пам'яті</h2>
+  <table class="mem">
+    <tr><th>Що відкрито</th><th>Оперативна пам'ять</th></tr>
+    <tr><td>Вікно Терміналу (порожнє)</td><td>≈ 45 МБ</td></tr>
+    <tr><td>Одна розмова Claude Code в ньому</td><td>≈ 230–260 МБ</td></tr>
+    <tr><td><b>Разом: термінал + одна справа</b></td><td>≈ 300 МБ</td></tr>
+    <tr class="est"><td>Застосунок Claude (вікно з кнопками) ще до першої розмови — усередині нього живе власна копія браузера</td><td>орієнтовно 0,5–1 ГБ</td></tr>
+    <tr class="big"><td>Для порівняння: Chrome з 25 вкладками на тому самому ноутбуці</td><td>1,4 ГБ</td></tr>
+  </table>
+  <div class="small">Термінальні цифри виміряно 22.09.2026 на MacBook з 8 ГБ пам'яті. Цифра застосунку — орієнтовна: він побудований на вбудованому браузері, як Telegram Desktop чи Viber, і їсть відповідно.</div>
+</section>
+
+<!-- 4 -->
+<section class="slide dark">
+  <div class="tag">Чому це важить</div>
+  <div class="quote">На ноутбуці з 8 ГБ одночасно живуть Word, браузер із реєстром, Електронний суд і помічник. Легка обгортка — це запас, щоб нічого не гальмувало.</div>
+  <div class="note">Друга справа в терміналі — ще одна вкладка і ще ≈ 250 МБ. Три справи паралельно — менше гігабайта. Застосунок з трьома розмовами важить помітно більше і на слабкій машині починає підвисати.</div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <h2><span class="num">03</span>Що вміє лише термінал</h2>
+  <ul class="main ok">
+    <li><b>Автоматика.</b> Команду з термінала можна запускати за розкладом — ранкове повідомлення в Telegram з уроку 7 працює саме так. Застосунок нічого не робить, поки закритий.</li>
+    <li><b>Пачки.</b> Розпізнати всі скани теки одним рядком (урок 4), а не по одному файлу.</li>
+    <li><b>Кілька справ у вкладках</b> — кожна вкладка підписана номером справи, видно, хто чим зайнятий.</li>
+    <li><b>Робота на іншому комп'ютері.</b> Термінал під'єднується до віддаленої машини чи сервера; розмову можна підхопити з телефона.</li>
+    <li><b>Не залежить від оновлень застосунку.</b> Зламалося вікно з кнопками — термінал працює далі.</li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <h2><span class="num">04</span>Що однакове</h2>
+  <ul class="main">
+    <li>Модель, підписка, ліміти — одні й ті самі.</li>
+    <li><b>CLAUDE.md</b> — файл правил читається однаково (урок 3).</li>
+    <li>Дозволи «Yes / No» перед кожною дією — ті самі.</li>
+    <li>Якість проєкту ухвали чи рішення — та сама. Обгортка на текст не впливає.</li>
+    <li>Одна справа — одна розмова; персональні дані — за тими самими правилами (урок 6).</li>
+  </ul>
+  <div class="note">Тобто ви не втрачаєте <b>нічого</b> з того, заради чого прийшли. Втрачаєте лише кнопки.</div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <h2><span class="num">05</span>Що в застосунку чесно зручніше</h2>
+  <ul class="main">
+    <li>Теку справи обираєш мишкою, а не набираєш <b>cd</b>.</li>
+    <li>Зміни у файлі показано кольором: що прибрав, що додав.</li>
+    <li>Список минулих розмов — збоку, а не по команді.</li>
+    <li>Нема «чорного екрана», який лякає перші два дні.</li>
+  </ul>
+  <div class="note warn">Це справжні плюси. Але всі вони — про перші дні. Через тиждень <b>cd</b> і стрілка вгору стають звичкою, а пам'ять і автоматика лишаються назавжди.</div>
+</section>
+
+<!-- 8 -->
+<section class="slide dark">
+  <h2><span class="num">06</span>Чорний екран — це п'ять команд</h2>
+  <div class="cheat">
+    <div><code>cd</code><span>зайти в теку: набрати cd, пробіл, перетягнути теку у вікно, Enter</span></div>
+    <div><code>claude</code><span>почати розмову в цій теці</span></div>
+    <div><code>/clear</code><span>нова справа — чистий аркуш</span></div>
+    <div><code>/exit</code><span>вийти з розмови</span></div>
+    <div><code>↑</code><span>стрілка вгору — повторити попередню команду</span></div>
+  </div>
+  <div class="note">Усе інше ви пишете <b>звичайною мовою</b>: «прочитай позов у теці і скажи, чого просить позивач». Термінал не вимагає програмування — він вимагає не боятися вікна з текстом.</div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <h2><span class="num">07</span>Чому курс іде через термінал</h2>
+  <div class="steps">
+    <div class="step"><div>Уроки 4 і 7 (скани пачкою, автоматика) <b>без термінала не працюють</b>.</div></div>
+    <div class="step"><div>Легший: старий ноутбук суду тягне його разом з Word і реєстром.</div></div>
+    <div class="step"><div>Одна дорога для всіх: Mac і Windows, у групі однакові команди — легше допомагати одна одній.</div></div>
+    <div class="step"><div>Застосунок потім <b>додається за п'ять хвилин</b>: ті самі правила, та сама тека. Навпаки — звикнути до кнопок, а потім іти в термінал — важче.</div></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <h2><span class="num">08</span>Коли застосунок — правильний вибір</h2>
+  <ul class="main">
+    <li>Комп'ютер новий, пам'яті 16 ГБ і більше — запас є.</li>
+    <li>Термінал відверто відлякує, і через це ви <b>взагалі не починаєте</b>. Краще застосунок, ніж нічого.</li>
+    <li>Автоматика і пачки сканів вам не потрібні — лише проєкти по одній справі.</li>
+  </ul>
+  <div class="note">У такому разі ставте застосунок із claude.ai/download, вкладка Code. Уроки 3, 5 і 6 діють без змін. Повернутися в термінал можна будь-коли — це та сама програма.</div>
+</section>
+
+<!-- 11 -->
+<section class="slide dark">
+  <div class="tag">Підсумок</div>
+  <div class="quote">Застосунок — це той самий помічник у важчому пальті. Термінал — той самий помічник, який до того ж працює, поки ви спите.</div>
+  <div class="sub">Наступний крок — урок 1: поставити Claude Code за 20 хвилин і зробити п'ять вправ на своїй закритій справі.</div>
+  <div class="footer"><span>Катерина Ремез</span><span>вересень 2026</span></div>
+</section>
+
+</div>
+<script>
+const deck=document.getElementById('deck');
+const slides=[...deck.querySelectorAll('.slide')];
+const counter=document.getElementById('counter');
+const hint=document.getElementById('hint');
+function update(){
+  const i=Math.round(deck.scrollTop/window.innerHeight);
+  const n=Math.max(0,Math.min(slides.length-1,i));
+  counter.textContent=(n+1)+' / '+slides.length;
+  if(n>0)hint.classList.add('gone');
+}
+deck.addEventListener('scroll',update,{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:-window.innerHeight,behavior:'smooth'});}
+});
+update();
+</script>
+</body>
+</html>
