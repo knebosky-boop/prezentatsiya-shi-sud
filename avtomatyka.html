@@ -1,0 +1,135 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 7 · Перша автоматика — і підсумки</title><meta name="description" content="Ранкове повідомлення в Telegram за одну розмову, що можливо далі, ваш цикл роботи."><meta property="og:title" content="Урок 7 · Перша автоматика — і підсумки"><meta property="og:description" content="Ранкове повідомлення в Telegram за одну розмову, що можливо далі, ваш цикл роботи."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">⏰ Урок 7 · за бажанням · і підсумки</span>
+  <h1>Перша автоматика — і що далі</h1>
+  <p>Помічник уміє не лише писати документи, а й писати маленькі програми для вас. Перша — ранкове повідомлення в Telegram. Далі — куди захочете.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="bezpeka.html">← Урок 6</a><a href="klava.html">Урок 2: як це виглядає через пів року →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Ідея</h2>
+  <p>Усе, що ви робите руками щодня однаково, можна доручити маленькій програмі. Написати її самій не треба — <b>помічник напише на прохання</b>, поставить на розклад і пояснить, як перевірити. Ви лише описуєте, що хочете, звичайною мовою.</p>
+  <div class="tip"><b>💡 Одне правило для всієї автоматики</b>Жодна програма не приймає процесуальних рішень. Вони лише збирають, рахують, нагадують і кладуть на видне місце. Рішення — ваше.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Перша програма: ранкове повідомлення в Telegram</h2>
+  <p>Щоранку о 8:00 на телефон приходить: «За добу в теці Справи з'явилося: 2-1234-26 — відзив.pdf; 2-5678-26 — нова тека». Дрібниця, але з неї починається все.</p>
+  <ol class="steps">
+    <li><b>Створіть бота.</b> У Telegram знайдіть <b>@BotFather</b>, напишіть <code class="i">/newbot</code>, дайте ім'я (наприклад, «Мій черговий») і адресу (латиницею, закінчується на <i>bot</i>). BotFather дасть <b>токен</b> — довгий рядок. Це пароль бота: нікому.</li>
+    <li><b>Напишіть боту.</b> Знайдіть свого бота в Telegram і надішліть йому будь-яке повідомлення, наприклад «привіт» — інакше він не знатиме, куди писати.</li>
+    <li><b>Скажіть помічнику.</b> Запустіть <code class="i">claude</code> у робочій теці:</li>
+  </ol>
+  <div class="cmd"><code>Хочу, щоб щоранку о 8:00 мені в Telegram приходив список файлів, які з'явилися за останню добу в теці Справи (перетягну теку). Я створила бота, ось токен: [вставте]. Я вже написала боту «привіт». Налаштуй так, щоб працювало, навіть якщо комп'ютер уранці був вимкнений — тоді одразу після увімкнення. Токен збережи у файл поза текою справ. Поясни, як перевірити, що працює, і як вимкнути.</code><button>Копіювати</button></div>
+  <p>Він напише програму, знайде адресу вашого чату з ботом, поставить на розклад (Mac — вбудований планувальник, Windows — Планувальник завдань) і надішле пробне повідомлення. Наступного ранку — перевірте телефон.</p>
+  <div class="warn"><b>⚠️ Токен</b>Ви щойно вставили токен у розмову з помічником — це нормально, він на вашому комп'ютері. Але не вставляйте його в групу, боту Клодику чи скріншот. Загубили — у @BotFather <code class="i">/revoke</code>, і старий токен більше не працює.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Що можна далі — з досвіду</h2>
+  <p>Ось що виросло в мене за кілька місяців. Не як план, а як меню: беріть по одній страві, коли захочеться.</p>
+  <div class="grid">
+    <div class="tile t3"><div class="e">☀️</div><b>Ранкове зведення</b><span>Що надійшло у справи, де підходить строк розгляду, які засідання сьогодні — у Telegram о 7:55</span></div>
+    <div class="tile t4"><div class="e">📅</div><b>Засідання</b><span>Розклад із сайту суду; «завтра о 10:00 — три справи» ввечері; «за годину» — вдень</span></div>
+    <div class="tile t5"><div class="e">⏳</div><b>Строки</b><span>Щодня — список справ, де від відкриття провадження минає 60 днів, а рішення ще немає</span></div>
+    <div class="tile t2"><div class="e">📚</div><b>Огляд практики</b><span>Раз на тиждень помічник сам читає свіжі постанови ВС за моїми категоріями і пише коротку записку</span></div>
+    <div class="tile t6"><div class="e">✅</div><b>Автоперевірка проєкту</b><span>Щойно створено документ — програма шукає незаповнені поля, заборонені звороти, неперевірені номери справ</span></div>
+    <div class="tile t1"><div class="e">💾</div><b>Резервна копія</b><span>Щовечора о 21:00 — усе важливе на окремий диск</span></div>
+  </div>
+  <p>Кожну з цих речей помічник написав за одну розмову, коли я описала, чого хочу. Найкориснішим виявилося не «розумне», а нудне: нагадування про строки й копія.</p>
+  <div class="tip"><b>💡 Головна хитрість — «доганяння»</b>Звичайний розклад на комп'ютері мовчки пропускає задачу, якщо комп'ютер спав. Тому в кожному проханні кажіть: «якщо пропустив — виконай, щойно з'явиться можливість». Помічник знає, як це зробити.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Як просити, щоб вийшло</h2>
+  <ul>
+    <li><b>Одну річ за раз.</b> «Ранкове повідомлення», не «систему нагадувань».</li>
+    <li><b>Результат, не спосіб.</b> Що має прийти, куди, коли. Як — він вирішить сам.</li>
+    <li><b>Спершу план.</b> «Розпиши, що зробиш, я погоджу» — особливо, коли він щось встановлюватиме.</li>
+    <li><b>Як перевірити і як вимкнути.</b> Завжди просіть обидва. Програма, яку не знаєш, як вимкнути, — не ваша.</li>
+    <li><b>Записуйте, що є.</b> Попросіть вести файл «Автоматика.md» у робочій теці: що працює, коли, як вимкнути. Через пів року ви не згадаєте.</li>
+  </ul>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Підсумки курсу: ваш цикл</h2>
+  <p>Якщо ви дійшли сюди, у вас є:</p>
+  <div class="flow">
+    <div>📁 Тека справи<small>впорядкована, скани розпізнані</small></div>
+    <div>📜 CLAUDE.md і зразки<small>він пише вашою мовою і за вашими правилами</small></div>
+    <div>📝 Проєкт у Word<small>закон у редакції на дату, практика з реєстру, довідка «що перевірити»</small></div>
+    <div>🔍 Перевірка<small>«очима апеляції», кожен реквізит у реєстрі, кожна цифра з документа</small></div>
+    <div>✍️ Підпис<small>ваш — і кожна правка йде в правила</small></div>
+  </div>
+  <p>Це і є весь метод. Усе інше — швидкість і зручність, які додаються поступово.</p>
+  <div class="good"><b>✅ Напишіть у групу</b>Три речі: що у вас працює; що не вийшло; чого не вистачило в курсі. З цього буде друга версія.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">6</span>Що далі</h2>
+  <ul>
+    <li><a href="klava.html">Урок 2</a> — як це виглядає через пів року щоденної роботи. Тепер він читатиметься інакше.</li>
+    <li>Група «Клодик» лишається: питання, знахідки, чужі CLAUDE.md, з яких можна брати рядки.</li>
+    <li>Бот Клодик знає всі уроки — питайте його першим з технічного.</li>
+    <li>Раз на місяць перечитуйте свій CLAUDE.md. Це дзеркало того, як ви працюєте.</li>
+  </ul>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

@@ -1,0 +1,253 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 3 · CLAUDE.md: навчити писати «як я»</title><meta name="description" content="Файл правил, три шаблони під спеціалізацію, тека зразків, звичка «правка → у правила»."><meta property="og:title" content="Урок 3 · CLAUDE.md: навчити писати «як я»"><meta property="og:description" content="Файл правил, три шаблони під спеціалізацію, тека зразків, звичка «правка → у правила»."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">📜 Урок 3 · найважливіший у курсі</span>
+  <h1>CLAUDE.md: як навчити помічника писати «як я»</h1>
+  <p>Секрет не в моделі — вона в усіх однакова. Різниця в тому, що ви їй написали. Один файл правил і тека зразків — і за місяць він пише вашою мовою.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="klava.html">← Урок 2</a><a href="skany.html">Урок 4: скани →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Чому без правил нічого не вийде</h2>
+  <p>Пам'яті між розмовами в нього немає. Учора ви пояснили, що вимоги позивача пишуться дослівно, — сьогодні нова розмова, і він знову скорочує. Пояснювати щодня — не вихід.</p>
+  <p>Вихід — <b>CLAUDE.md</b>: звичайний текстовий файл у вашій робочій теці. Він перечитує його <b>на початку кожної розмови</b>. Що там написано — те він і робить, щоразу, без нагадувань.</p>
+  <div class="grid">
+    <div class="tile t1"><div class="e">😩</div><b>Без CLAUDE.md</b><span>Щоранку пояснюєте те саме. Проєкти «загальні», не ваші</span></div>
+    <div class="tile t3"><div class="e">😌</div><b>З CLAUDE.md</b><span>Хто ви, як писати, чого не можна — записано раз. Кожна правка додає рядок</span></div>
+  </div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Як створити</h2>
+  <p>Два способи, обидва прості:</p>
+  <ol class="steps">
+    <li>У розмові з Claude Code наберіть <code class="i">/init</code> — він подивиться теку і створить CLAUDE.md сам. Потім ви його доповните.</li>
+    <li>Або просто скажіть словами: <i>«Створи файл CLAUDE.md у цій теці з такими правилами: …»</i> — і вставте текст шаблону з розділу 3.</li>
+  </ol>
+  <p>Подивитися і поправити файл можна будь-коли: команда <code class="i">/memory</code> або відкрити його як звичайний текстовий файл у теці.</p>
+  <div class="tip"><b>💡 Де лежить</b>У корені робочої теки «Помічник» — тоді діє на всі справи. Можна покласти окремий CLAUDE.md у теку конкретної справи — тоді додаються правила для неї (наприклад, «у цій справі троє відповідачів, не плутай»).</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Готові шаблони — оберіть свій</h2>
+  <p>Три шаблони під спеціалізацію. Скопіюйте свій, замініть [дужки] на своє, решту лишіть — вона перевірена. Спільне в усіх трьох: вимоги дослівно, норма в редакції на дату, реквізити ВС з перевіркою, «скажи, коли я помиляюся», проєкт — чернетка.</p>
+
+  <details open>
+    <summary><b>⚖️ Цивільні справи</b></summary>
+    <div class="cmd"><code># Хто я
+Суддя [назва суду]. Розглядаю цивільні справи: [сімейні, спадкові, житлові, договірні, аліменти — свій перелік]. Ти — мій помічник: акуратний, уважний до деталей, знаєш ЦПК.
+
+# Як зі мною спілкуватися
+- Мова — українська, офіційно-діловий стиль у документах; у чаті — коротко і по суті.
+- Не знаєш або бракує даних — так і кажи. Не вигадуй і не додумуй.
+- Якщо я помиляюся (вказівка суперечить ЦПК, позиції Верховного Суду, нечинній редакції норми, строку чи формі провадження) — скажи це ДО того, як віддаси проєкт. Потім зроби, як я сказала.
+
+# Матеріали справи
+- Одна справа — одна тека. Перш ніж писати, прочитай усе, що в теці, а не перший файл.
+- Скани розпізнаються всі. Пропущений документ — пропущений доказ.
+- Кожен факт у хронології — з посиланням: назва документа й аркуш.
+- Цифри (суми, дати, площі, частки) — з тексту документа, не з пам'яті.
+
+# Документи
+- Позовні вимоги — ДОСЛІВНО з прохальної частини. Не скорочувати, не переказувати.
+- Норму брати в редакції, чинній на дату спірних відносин, і писати це прямо: «в редакції, чинній станом на …». Текст норми — з офіційного тексту закону, не з чужого рішення.
+- Кожна позиція Верховного Суду — номер справи + дата постанови + суд. Не знайшов — скажи, не вигадуй.
+- Структура рішення — за ст. 265 ЦПК; ухвали — за ст. 260 ЦПК.
+- Готовий проєкт — файл Word у теці справи, поруч — коротка довідка: що перевірити мені, де ризик.
+- Проєкт — чернетка. Підписую я.
+
+# Мої зразки
+- У теці «Зразки» — мої рішення й ухвали. Стиль, структура, звороти — як там.
+- Не пиши «таким чином»; замість цього — «отже».
+
+# Чого не можна
+- Вигадувати реквізити, номери, дати, цитати.
+- Змінювати виклад позовних вимог.
+- Приймати процесуальні рішення за мене — ти готуєш, вирішую я.
+- Видавати чернетку за готовий документ.</code><button>Копіювати</button></div>
+  </details>
+
+  <details>
+    <summary><b>🔒 Кримінальні провадження</b></summary>
+    <div class="warn"><b>⚠️ Спершу — урок 6</b>Кримінальні матеріали — найчутливіші. Закриті провадження, неповнолітні, статеві злочини — окреме рішення, чи класти їх у теку помічника взагалі.</div>
+    <div class="cmd"><code># Хто я
+Суддя [назва суду], кримінальні провадження: [свій перелік — злочини проти власності, ДТП, наркотики, угоди про визнання винуватості…]. Ти — мій помічник: знаєш КПК і КК, акуратний.
+
+# Як зі мною спілкуватися
+- Мова — українська, офіційно-діловий стиль у документах; у чаті — коротко.
+- Не знаєш — кажи. Не вигадуй.
+- Моя вказівка суперечить КПК, КК, позиції Верховного Суду або нечинній редакції — скажи ДО того, як віддаси проєкт. Потім зроби, як я сказала.
+
+# Матеріали
+- Одна справа — одна тека. Читай усе в теці, не перший файл.
+- Скани розпізнаються всі.
+- Формулювання обвинувачення (з обвинувального акта) — ДОСЛІВНО. Не скорочувати, не перефразовувати.
+- Кваліфікація — за редакцією КК на час вчинення діяння, і це прямо в тексті. Зміна закону між діянням і розглядом — окремий абзац (ст. 5 КК).
+- Показання, речові докази, висновки експертиз — з посиланням на документ і аркуш.
+- Строки, дати затримання, запобіжні заходи — звіряти з документами, не з пам'яті.
+
+# Документи
+- Вирок — структура за ст. 374 КПК; ухвала — за ст. 372 КПК.
+- Кожна позиція Верховного Суду — номер справи + дата + суд. Не знайшов — скажи.
+- Покарання: обґрунтування за ст. 65 КК; пом'якшувальні й обтяжуючі — з посиланням на докази.
+- Готовий проєкт — Word у теці справи; поруч довідка: що перевірити мені, де ризик.
+- Проєкт — чернетка. Підписую я.
+
+# Мої зразки
+- У теці «Зразки» — мої вироки й ухвали. Стиль і структура — як там.
+- Не пиши «таким чином»; замість цього — «отже».
+
+# Чого не можна
+- Вигадувати реквізити, цитати, номери справ, дати.
+- Змінювати формулювання обвинувачення.
+- Приймати рішення про вину, покарання, запобіжний захід — ти готуєш матеріал, вирішую я.
+- Видавати чернетку за готовий документ.</code><button>Копіювати</button></div>
+  </details>
+
+  <details>
+    <summary><b>🚔 Справи про адміністративні правопорушення (КУпАП)</b></summary>
+    <div class="cmd"><code># Хто я
+Суддя [назва суду], справи про адміністративні правопорушення: [ст. 130, 124, 173, 185 КУпАП — свій перелік]. Ти — мій помічник: знаєш КУпАП, акуратний, уважний до строків.
+
+# Як зі мною спілкуватися
+- Мова — українська, офіційно-діловий стиль у документах; у чаті — коротко.
+- Не знаєш — кажи. Не вигадуй.
+- Моя вказівка суперечить КУпАП, позиції Верховного Суду або нечинній редакції — скажи ДО того, як віддаси проєкт. Потім зроби, як я сказала.
+
+# Матеріали
+- Одна справа — одна тека. Читай усе.
+- Скани (протокол, схема, пояснення, відео-опис) розпізнаються всі.
+- Перше, що перевіряєш у кожній справі: строк накладення стягнення (ст. 38 КУпАП) — дата правопорушення, дата надходження, скільки лишилося. Пиши це окремим рядком у довідці.
+- Фабула з протоколу — ДОСЛІВНО. Не скорочувати.
+- Санкція — у редакції статті на дату правопорушення, і це прямо в тексті.
+
+# Документи
+- Постанова — структура за ст. 283 КУпАП.
+- Кожна позиція Верховного Суду — номер справи + дата + суд. Не знайшов — скажи.
+- Готовий проєкт — Word у теці справи; поруч довідка: строк за ст. 38, що перевірити, де ризик.
+- Проєкт — чернетка. Підписую я.
+
+# Мої зразки
+- У теці «Зразки» — мої постанови. Стиль і структура — як там.
+- Не пиши «таким чином»; замість цього — «отже».
+
+# Чого не можна
+- Вигадувати реквізити, дати, цитати.
+- Змінювати фабулу протоколу.
+- Приймати рішення про стягнення за мене — готуєш ти, вирішую я.
+- Видавати чернетку за готовий документ.</code><button>Копіювати</button></div>
+  </details>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Тека «Зразки»</h2>
+  <p>Правила кажуть, <i>що</i> робити. Зразки показують, <i>як</i> це виглядає. Створіть у робочій теці теку <b>Зразки</b> і покладіть туди 3–5 своїх найкращих актів різних жанрів: ухвалу про відкриття, рішення по суті, ухвалу про залишення без руху. У Word або PDF з текстом — не сканом.</p>
+  <p>У CLAUDE.md уже є рядок «стиль, структура, звороти — як у зразках». Тепер він працює: помічник перед написанням зазирне туди і візьме вашу структуру, ваші перехідні фрази, ваш спосіб цитувати норми.</p>
+  <div class="tip"><b>💡 Зразки з персональними даними</b>Це ваші акти, вони опубліковані в ЄДРСР зі знеособленням. Найпростіше — взяти саме ЄДРСР-версію: там уже прибрано прізвища.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>Головна звичка: правка → у правила</h2>
+  <p>Ось як виглядає день з помічником, який стає «вашим»:</p>
+  <div class="chat"><span class="u">Ви:</span> Склади проєкт ухвали про відкриття провадження у справі з теки.</div>
+  <div class="chat"><span class="u">Він:</span> <i>…готує проєкт, у вступі пише «суддя … розглянувши позовну заяву …»</i></div>
+  <div class="chat"><span class="u">Ви:</span> Ні, ми так не пишемо. У вступі — «розглянувши матеріали позовної заяви» і повна назва суду без скорочень. Виправ — <b>і запиши це правило в CLAUDE.md</b>.</div>
+  <div class="chat"><span class="u">Він:</span> Виправив. Додав у CLAUDE.md рядок: «У вступній частині — "розглянувши матеріали позовної заяви", назва суду повністю».</div>
+  <p>Наступної розмови він так і напише — без нагадування. Три правки на день, місяць — і у вас файл, у якому записаний ваш стиль. Це і є те, чого не купиш ні за яку підписку.</p>
+  <div class="good"><b>✅ Перевірка, що він справді записав</b>Після «запиши в CLAUDE.md» відкрийте файл (або <code class="i">/memory</code>) і подивіться, що рядок є і сформульований так, як ви мали на увазі. Він іноді записує загальніше, ніж треба.</div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>Вправа: проєкт ухвали — до і після правил</h2>
+  <ol class="steps">
+    <li>У теці закритої справи запустіть <code class="i">claude</code> і попросіть проєкт <b>ще без CLAUDE.md</b> (або тимчасово перейменуйте файл): <i>«Склади проєкт ухвали про відкриття провадження. Збережи в теку як Word.»</i> Збережіть результат.</li>
+    <li>Створіть CLAUDE.md зі свого шаблону, покладіть зразки. <code class="i">/clear</code>.</li>
+    <li>Той самий промпт. Порівняйте два файли: вимоги дослівно? структура ваша? назва суду повна?</li>
+    <li>Знайдіть три речі, які все одно не так. Кожну — «виправ і запиши в CLAUDE.md».</li>
+  </ol>
+  <div class="tip"><b>💡 Word</b>Коли просите «збережи як Word», він створює файл .docx у теці справи. Першого разу може попросити дозвіл поставити невелику бібліотеку для роботи з Word — погодьтеся. Хочете свій бланк — покладіть порожній бланк .docx у «Зразки» і скажіть: «за бланком з теки Зразки».</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">7</span>Пастки</h2>
+  <table>
+    <tr><td>«Він забув правило»</td><td>Перевірте, чи воно в CLAUDE.md, а не лише сказане в розмові. У розмові — до <code class="i">/clear</code>. У файлі — назавжди.</td></tr>
+    <tr><td>Файл на п'ять сторінок</td><td>Що довший CLAUDE.md, то гірше він тримає кожне правило. Постійне — у CLAUDE.md, а правила окремого жанру (як писати рішення, як ухвалу) — окремими файлами в теці «Інструкції», і кажіть: «прочитай Інструкції/рішення.md і пиши за ним».</td></tr>
+    <tr><td>Правила суперечать одне одному</td><td>«Пиши коротко» і «мотивування повне» — він обере навмання. Перечитуйте файл раз на місяць.</td></tr>
+    <tr><td>Записав не те</td><td>Просто поправте текст у файлі руками — це звичайний текст.</td></tr>
+    <tr><td>Правило є, а він робить по-своєму</td><td>Скажіть: «У CLAUDE.md є правило про …, ти його порушив. Виправ». Він перечитає і виправить. Якщо повторюється — правило сформульоване нечітко, перепишіть конкретніше.</td></tr>
+  </table>
+</section>
+
+<section class="a5">
+  <h2><span class="n">8</span>Куди це росте</h2>
+  <p>В <a href="klava.html">уроці 2</a> видно, до чого це доходить за кілька місяців: окремі файли правил на кожен жанр, шпаргалки по категоріях справ, готові абзаци, пам'ять між розмовами. <b>Не робіть цього зараз.</b> Один CLAUDE.md, одна тека зразків, три правки на день — цього досить, щоб через місяць він писав як ви.</p>
+</section>
+
+<section class="a4">
+  <h2><span class="n">9</span>Домашнє</h2>
+  <ol>
+    <li>CLAUDE.md зі свого шаблону, [дужки] замінені.</li>
+    <li>Тека «Зразки» з 3 вашими актами.</li>
+    <li>Вправа з розділу 6: проєкт ухвали до і після; три правки → три рядки в CLAUDE.md.</li>
+    <li>У групу — текст свого CLAUDE.md (даних справ там немає) і одне речення: що змінилося після правил.</li>
+  </ol>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

@@ -1,0 +1,186 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 6 · Порядок, безпека, ліміти</title><meta name="description" content="Одна справа — одна розмова, персональні дані, дозволи, резервна копія, чекліст."><meta property="og:title" content="Урок 6 · Порядок, безпека, ліміти"><meta property="og:description" content="Одна справа — одна розмова, персональні дані, дозволи, резервна копія, чекліст."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">🔒 Урок 6 · обов'язковий</span>
+  <h1>Порядок, безпека, ліміти</h1>
+  <p>Як не нашкодити: собі, справі, сторонам. Одна справа — одна розмова, персональні дані, дозволи, резервна копія — і чекліст, який проходять один раз.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="proekt.html">← Урок 5</a><a href="avtomatyka.html">Урок 7: автоматика →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Одна справа — одна розмова</h2>
+  <p>Усе, що він прочитав у розмові, лежить у нього «на столі». Стіл не безрозмірний. Друга справа в тій самій розмові — він починає плутати сторони й суми. Третя — плутає впевнено.</p>
+  <div class="grid">
+    <div class="tile t2"><div class="e">🧹</div><b>/clear</b><span>Справу здано — нова розмова з чистого аркуша. Правила з CLAUDE.md він перечитає сам</span></div>
+    <div class="tile t4"><div class="e">📦</div><b>/compact</b><span>Розмова задовга, а справа та сама — стиснути: він залишить суть і продовжить</span></div>
+    <div class="tile t5"><div class="e">⏪</div><b>/resume</b><span>Повернутися до вчорашньої розмови, якщо справу не закінчили</span></div>
+  </div>
+  <p>Є ще й гроші: що довша розмова, то більше він перечитує на кожному кроці, і ліміт тане швидше. Довга розмова — і плутаніша, і дорожча. Тому <b>здав документ — <code class="i">/clear</code></b>.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Модель: для суду — найсильніша</h2>
+  <p>У Claude кілька моделей: швидша й дешевша, і сильніша й повільніша. Команда <code class="i">/model</code> показує, яка стоїть. Для чернетки листа підійде будь-яка. Для рішення, де важлива кожна норма і кожен довід, — <b>найсильніша</b>. Економити треба не на моделі, а на зайвих кроках: не просити «перепиши ще раз» без причини, не тримати десять справ в одній розмові.</p>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Ліміти і гроші — чесно</h2>
+  <table>
+    <tr><td>Як працює ліміт</td><td>Підписка дає обсяг роботи на кілька годин. Вичерпали — «Ліміт вичерпано», чекаєте, поки відновиться. Ніщо не втрачається.</td></tr>
+    <tr><td>Pro</td><td>Спробувати, кілька документів на тиждень. Розпізнана справа на 200 сторінок + проєкт по суті — може впертися в ліміт.</td></tr>
+    <tr><td>Max</td><td>Щоденна робота. У кілька разів більший ліміт. Дорожче — і саме тут варто порахувати: скільки годин на тиждень він вам повертає.</td></tr>
+    <tr><td>Що з'їдає ліміт</td><td>Картинки замість тексту (урок 4), довгі розмови без /clear, «перепиши ще раз» без конкретики.</td></tr>
+    <tr><td>Google OCR</td><td>Окремо, копійки, списується з картки у Google.</td></tr>
+  </table>
+</section>
+
+<section class="a1">
+  <h2><span class="n">4</span>Персональні дані — найважливіший розділ</h2>
+  <p><b>Що відбувається насправді:</b> текст документів, які він читає, відправляється на сервери Anthropic (США) і там обробляється. Це не програма «в себе на комп'ютері». Тому:</p>
+  <ol class="steps">
+    <li><b>Налаштування.</b> На <a href="https://claude.ai">claude.ai</a> → Settings → Privacy: перевірте, що розмови <b>не використовуються для навчання моделі</b>. Це один перемикач, зробити один раз.</li>
+    <li><b>Правила вашого суду.</b> Дізнайтеся, що дозволено: робота з матеріалами на особистому комп'ютері, у хмарних сервісах. Дійте в цих межах. Це ваша відповідальність, і ніякий урок її не знімає.</li>
+    <li><b>Не завантажуйте зайвого.</b> Для проєкту ухвали про відкриття потрібен позов і додатки — не вся справа з медичними довідками.</li>
+    <li><b>Категорії окремого рішення.</b> Неповнолітні, закриті засідання, статеві злочини, усиновлення, психіатрія, державна таємниця — <b>не в теку помічника</b>, поки ви особисто не вирішили інакше з розумінням ризику.</li>
+    <li><b>Знеособлення там, де можливо.</b> Для зразків беріть ЄДРСР-версії — там уже прибрано прізвища. Для навчання — закриті справи.</li>
+    <li><b>Прибирайте.</b> Розглянута справа з теки помічника — в архів або видалити. Тека не має ставати другою канцелярією.</li>
+  </ol>
+  <div class="warn"><b>⚠️ Група і бот</b>У групу «Клодик» і боту — жодних матеріалів справ, прізвищ сторін, номерів справ у роботі. Бот — той самий Claude на серверах, а група — люди.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">5</span>Дозволи: чому не вмикати «без питань»</h2>
+  <p>Перед кожною дією з файлами він показує, що зробить, і питає: Yes / Yes, and don't ask again / No. Це захист. Є режим, коли він не питає, — зручно, коли розумієш, що він робить, і небезпечно, коли ні.</p>
+  <table>
+    <tr><td>Shift + Tab</td><td>Перемикає режими: звичайний → «правити файли без питань» → «лише план, нічого не робити».</td></tr>
+    <tr><td>Поки вчитеся</td><td>Звичайний режим. Читайте, що він пропонує, погоджуйтеся по одному. За тиждень стане зрозуміло, чому він робить що.</td></tr>
+    <tr><td>Режим «лише план»</td><td>Для складного: «розпиши, що зробиш». Він планує, ви погоджуєте, потім перемикаєте назад.</td></tr>
+    <tr><td>Де запускати</td><td>Лише в робочій теці «Помічник». Не в корені диска, не в «Документах» цілком — він бачить усе, де запущений.</td></tr>
+    <tr><td>Пішов не туди</td><td><b>Esc</b> — зупиниться. Поправте словами.</td></tr>
+  </table>
+</section>
+
+<section class="a5">
+  <h2><span class="n">6</span>Резервна копія — один раз і назавжди</h2>
+  <p>Він змінює файли. Здебільшого правильно, іноді — ні. Плюс комп'ютери ламаються. Копія робочої теки — не «колись», а сьогодні:</p>
+  <h3>🍏 Mac</h3>
+  <p>Системні налаштування → Основні → Time Machine → зовнішній диск. Далі саме, щогодини. Повернути будь-який файл на будь-який момент — за хвилину.</p>
+  <h3>🪟 Windows</h3>
+  <p>Налаштування → Оновлення та безпека → Служба архівації → «Історія файлів» на зовнішній диск. Або простіше: раз на тиждень копіювати теку «Помічник» на флешку. Скажіть помічнику — він налаштує автоматичне копіювання (урок 7).</p>
+  <div class="good"><b>✅ Перевірка</b>Копія є лише тоді, коли ви відкрили її і побачили свій файл. «Налаштовано» без перевірки — не копія.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">7</span>Ключі, токени, паролі</h2>
+  <ul>
+    <li>Файл-ключ Google (урок 4), токен Telegram-бота (урок 7), паролі — <b>поза текою справ</b>, у теці «ключі» в Документах.</li>
+    <li>Нікому не пересилати: ні в групу, ні боту, ні «подрузі, щоб налаштувала». Той, у кого ключ, платить вашою карткою і пише від вашого бота.</li>
+    <li>Скріншот екрана з ключем — теж передача ключа. Перш ніж кидати скріншот у групу, подивіться, що на ньому.</li>
+    <li>Пароль до claude.ai — окремий, не той, що до пошти. Двофакторний вхід — увімкнути.</li>
+  </ul>
+</section>
+
+<section class="a3">
+  <h2><span class="n">8</span>Чекліст — пройти один раз</h2>
+  <p>Відмітьте у себе кожен пункт. У групу — лише «чекліст пройдено».</p>
+  <h3>Акаунт</h3>
+  <ul>
+    <li>☐ Підписка на особистий акаунт, надійний пароль, двофакторний вхід.</li>
+    <li>☐ Settings → Privacy: розмови не йдуть на навчання моделі.</li>
+    <li>☐ Запускаю лише в робочій теці «Помічник».</li>
+    <li>☐ Режим «без питань» вимкнений, дозволи даю по одному.</li>
+  </ul>
+  <h3>Матеріали</h3>
+  <ul>
+    <li>☐ Знаю правила свого суду і дію в їх межах.</li>
+    <li>☐ У теку помічника — лише потрібне для задачі.</li>
+    <li>☐ Неповнолітні, закриті засідання, статеві злочини — не в теці.</li>
+    <li>☐ Розумію: текст іде на сервери Anthropic.</li>
+    <li>☐ Розглянуті справи з теки прибираю.</li>
+  </ul>
+  <h3>Перевірка</h3>
+  <ul>
+    <li>☐ Кожен реквізит ВС — у реєстрі.</li>
+    <li>☐ Кожна норма — редакція на дату, звірена з офіційним текстом.</li>
+    <li>☐ Кожна цифра — з документа.</li>
+    <li>☐ Проєкт — чернетка; перечитую цілком перед підписом.</li>
+  </ul>
+  <h3>Комп'ютер</h3>
+  <ul>
+    <li>☐ Резервна копія є і перевірена.</li>
+    <li>☐ Пароль на вхід, автоблокування через 5 хвилин.</li>
+    <li>☐ Ключі й токени — поза текою справ, нікому не показані.</li>
+  </ul>
+  <h3>Група</h3>
+  <ul>
+    <li>☐ У групу — без матеріалів справ, прізвищ і номерів справ у роботі.</li>
+  </ul>
+</section>
+
+<section class="a4">
+  <h2><span class="n">9</span>Домашнє</h2>
+  <ol>
+    <li>Чекліст пройдено, усі пункти відмічено.</li>
+    <li>Резервна копія налаштована і перевірена (файл справді є в копії).</li>
+    <li>Settings → Privacy — перевірено.</li>
+    <li>У групу: «чекліст пройдено, копія є» і питання, які лишилися.</li>
+  </ol>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

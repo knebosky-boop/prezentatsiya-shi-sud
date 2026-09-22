@@ -1,0 +1,180 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 4 · Матеріали справи: теки, скани, розпізнавання</title><meta name="description" content="Порядок у теці, Google Document AI крок за кроком, варіант без Google, правило «розпізнається все»."><meta property="og:title" content="Урок 4 · Матеріали справи: теки, скани, розпізнавання"><meta property="og:description" content="Порядок у теці, Google Document AI крок за кроком, варіант без Google, правило «розпізнається все»."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">🔎 Урок 4 · найтехнічніший · не поспішайте</span>
+  <h1>Матеріали справи: теки, скани, розпізнавання тексту</h1>
+  <p>Більшість матеріалів — скани. Поки вони картинки, помічник читає їх повільно й з помилками. Один раз налаштуємо розпізнавання — і далі він працює з текстом.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="pravyla.html">← Урок 3</a><a href="proekt.html">Урок 5: проєкт по суті →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Порядок у теці справи</h2>
+  <p>Помічник бачить теку такою, як вона є. Хаос у теці — хаос у відповідях. Проста схема, якої достатньо:</p>
+  <div class="flow">
+    <div>📁 Помічник<small>робоча тека, тут CLAUDE.md і тека Зразки</small></div>
+    <div>📁 Помічник / 2-1234-26 аліменти<small>одна справа — одна тека; у назві номер і два слова про суть</small></div>
+    <div>📄 01 позовна заява.pdf · 02 відзив.pdf · 03 протокол.pdf …<small>зрозумілі імена; номер на початку тримає порядок надходження</small></div>
+    <div>📁 Текст<small>сюди лягатимуть розпізнані текстові версії (розділ 4)</small></div>
+  </div>
+  <div class="tip"><b>💡 Імена файлів — це теж правило</b>«Скан_0001.pdf» помічник відкриє, але не зрозуміє, що це відзив, поки не прочитає. Хвилина на перейменування економить купу питань.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">2</span>Скан — це картинка, а не текст</h2>
+  <p>Відкрийте PDF і спробуйте виділити слово мишкою. Виділяється — це текст, помічник читає його миттєво і точно. Не виділяється, виділяється вся сторінка прямокутником — це <b>скан, фотографія сторінки</b>.</p>
+  <p>Картинки він теж бачить. Але:</p>
+  <div class="grid">
+    <div class="tile t1"><div class="e">🐢</div><b>Повільно</b><span>Кожна сторінка-картинка — окрема «фотографія» для моделі. 200 сторінок — довго</span></div>
+    <div class="tile t5"><div class="e">💸</div><b>Дорого по лімітах</b><span>Картинка «важить» у десятки разів більше за той самий текст. Ліміт підписки тане</span></div>
+    <div class="tile t6"><div class="e">🔢</div><b>Помилки в цифрах</b><span>«48 000» може прочитатися як «46 000». У мотивуванні це катастрофа</span></div>
+  </div>
+  <p>Тому скани один раз перетворюємо на текст. Це називається <b>OCR</b> — оптичне розпізнавання символів.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">3</span>Два шляхи — оберіть свій</h2>
+  <table>
+    <tr><td>🅰 Google Document AI</td><td>Промислове розпізнавання. Налаштовується один раз (розділ 4), далі помічник сам розпізнає всі PDF у теці однією командою. Ціна — порядку долара-двох за тисячу сторінок. <b>Для щоденної роботи — цей.</b></td></tr>
+    <tr><td>🅱 Без Google</td><td>Вбудоване розпізнавання Mac або Windows, руками, документ за документом (розділ 6). Безкоштовно, без реєстрацій. Для 5–10 сторінок — нормально; для тому справи — мука.</td></tr>
+  </table>
+  <p>Можна почати з 🅱 сьогодні, а 🅰 зробити на вихідних. Головне — не лишати скани сканами.</p>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>🅰 Google Document AI — крок за кроком</h2>
+  <p>Це найдовший розділ курсу. Займе 30–40 хвилин, робиться один раз. Потрібні: Google-акаунт (звичайний gmail) і банківська картка.</p>
+  <ol class="steps">
+    <li><b>Зайти в консоль.</b> Відкрийте <a href="https://console.cloud.google.com">console.cloud.google.com</a> своїм Google-акаунтом. Погодьтеся з умовами.</li>
+    <li><b>Створити проєкт.</b> Угорі — список проєктів → «New project» / «Новий проєкт». Назва будь-яка, наприклад <i>Sud-OCR</i>. Створити, дочекатися, обрати його.</li>
+    <li><b>Підключити оплату.</b> Меню ☰ → «Billing» / «Платіжні дані» → створити платіжний обліковий запис, картка. Google зазвичай дає стартовий кредит новим акаунтам; реально списуватимуться копійки.</li>
+    <li><b>Увімкнути Document AI.</b> У пошуку вгорі наберіть <i>Document AI</i> → відкрити → кнопка «Enable» / «Увімкнути API».</li>
+    <li><b>Створити процесор.</b> У Document AI → «Processors» → «Create processor» → тип <b>Document OCR</b> → назва <i>ocr</i> → регіон <i>eu</i> (Європа) → Create. На сторінці процесора скопіюйте <b>ID</b> (довгий рядок з букв і цифр) — збережіть у нотатки.</li>
+    <li><b>Створити ключ.</b> ☰ → «IAM &amp; Admin» → «Service accounts» → «Create service account» → назва <i>ocr</i> → роль <b>Document AI API User</b> → Done. Потім у списку — цей акаунт → вкладка «Keys» → «Add key» → «Create new key» → JSON. Файл завантажиться на комп'ютер.</li>
+    <li><b>Сховати ключ.</b> Перекладіть JSON-файл у теку <b>поза</b> справами, наприклад «Документи / ключі». Це пароль: нікому не пересилати, у групу не кидати.</li>
+  </ol>
+  <div class="warn"><b>⚠️ Якщо десь застрягли</b>Не мучтеся: сфотографуйте екран (без ключа!) і спитайте Клодика в групі або напишіть Катерині. Це найчастіше місце, де зупиняються, — ви не одна.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">5</span>Хай він сам собі напише інструмент</h2>
+  <p>Далі найприємніше: програму для розпізнавання пише сам помічник. Запустіть <code class="i">claude</code> у робочій теці «Помічник» і скажіть:</p>
+  <div class="cmd"><code>У мене є ключ Google Document AI — файл [перетягніть JSON-файл у вікно], процесор з ID [вставте ID], регіон eu. Напиши мені інструмент, який розпізнає всі PDF-скани у вказаній теці справи і кладе поруч у підтеку «Текст» текстові файли з тими самими іменами. Файли, де текст уже є, пропускай. Поясни, як його запускати.</code><button>Копіювати</button></div>
+  <p>Він напише програму, попросить дозвіл поставити потрібні бібліотеки (погодьтеся), перевірить на одному файлі і скаже, як запускати далі — зазвичай одним реченням: <i>«розпізнай теку 2-1234-26»</i>.</p>
+  <div class="good"><b>✅ Перевірка</b>Відкрийте будь-який файл у теці «Текст». Там має бути читабельний текст документа. Знайдіть у ньому суму чи дату і порівняйте зі сканом.</div>
+  <div class="tip"><b>💡 Додайте в CLAUDE.md</b>«Перш ніж читати справу, перевір, чи є в теці Текст розпізнані версії всіх PDF. Немає — спершу розпізнай.» Тепер він робитиме це сам.</div>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>🅱 Без Google: вбудоване розпізнавання</h2>
+  <h3>🍏 Mac</h3>
+  <ol class="steps">
+    <li>Відкрийте скан у програмі <b>Перегляд</b> (Preview).</li>
+    <li>Наведіть на текст — курсор стає текстовим. Це «Живий текст»: виділіть усе (<b>⌘ + A</b>), скопіюйте (<b>⌘ + C</b>).</li>
+    <li>Відкрийте <b>TextEdit</b>, вставте, збережіть як текст у теку «Текст» з іменем документа.</li>
+  </ol>
+  <h3>🪟 Windows 11</h3>
+  <ol class="steps">
+    <li>Відкрийте скан, натисніть <b>Win + Shift + S</b> («Ножиці»), обведіть сторінку.</li>
+    <li>У вікні «Ножиць» — кнопка <b>«Текстові дії»</b> → «Копіювати весь текст».</li>
+    <li>Вставте в Блокнот, збережіть у теку «Текст».</li>
+  </ol>
+  <h3>📱 Телефон</h3>
+  <p>Камера iPhone або Google Об'єктив розпізнає текст з екрана чи паперу. Скопіювати → переслати собі → у теку «Текст». Для одного протоколу — швидше за все інше.</p>
+  <div class="warn"><b>⚠️ Обмеження</b>Сторінка за сторінкою. Для справи на 150 аркушів — ні. Це шлях «сьогодні спробувати», а не «так працювати».</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">7</span>Два правила, які ніхто не скасує</h2>
+  <div class="warn"><b>⚠️ Розпізнається все, а не вибірково</b>Пропущений документ — пропущений доказ. Якщо помічник каже «у справі немає відзиву», а відзив лежить нерозпізнаним сканом — це ваша помилка, не його. Тому розпізнаємо всю теку, а не «головне».</div>
+  <div class="warn"><b>⚠️ Цифра в мотивуванні — з тексту документа</b>Кожну суму, дату, площу, частку, яку він написав у проєкті, звіряйте з розпізнаним текстом, а краще — зі сканом. Скажіть йому: «Звір усі суми й дати у проєкті з документами в теці, кожну розбіжність — окремим рядком». Він зробить, але дивитеся ви.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">8</span>Вправа: знайти розбіжність</h2>
+  <ol class="steps">
+    <li><b>До</b> розпізнавання: «Прочитай скан [файл] і випиши всі суми й дати з нього».</li>
+    <li>Розпізнайте файл (🅰 або 🅱).</li>
+    <li><b>Після</b>: «Прочитай Текст/[файл] і випиши всі суми й дати».</li>
+    <li>Порівняйте два списки. Майже завжди буде хоч одна розбіжність. Це і є ціна «читання на око».</li>
+  </ol>
+</section>
+
+<section class="a4">
+  <h2><span class="n">9</span>Якщо не працює</h2>
+  <table>
+    <tr><td>«Permission denied» / помилка доступу від Google</td><td>Ключ створено не в тому проєкті або без ролі Document AI API User. Перевірте крок 6.</td></tr>
+    <tr><td>«Billing account not found»</td><td>Оплата не підключена до проєкту (крок 3).</td></tr>
+    <tr><td>Текст розпізнано, але «каша»</td><td>Скан дуже поганої якості або повернутий. Скажіть помічнику: «спробуй повернути сторінки і розпізнати ще раз». Не допомогло — цей документ читаємо очима.</td></tr>
+    <tr><td>Розпізнав не всі файли</td><td>Ліміт розміру одного файлу. «Розбий великий PDF на частини по 30 сторінок і розпізнай кожну» — він зробить.</td></tr>
+    <tr><td>Я не розумію, що він робить</td><td>Спитайте його: «поясни простими словами, що ти зараз зробиш і навіщо». Він пояснює добре.</td></tr>
+  </table>
+</section>
+
+<section class="a2">
+  <h2><span class="n">10</span>Домашнє</h2>
+  <ol>
+    <li>Тека однієї справи впорядкована (розділ 1).</li>
+    <li>Усі скани цієї справи розпізнані — 🅰 або, якщо не встигли, 🅱 хоча б для двох документів.</li>
+    <li>Хронологія подій із посиланням на документ і аркуш — з розпізнаного тексту.</li>
+    <li>Одна розбіжність «картинка проти тексту» (розділ 8).</li>
+    <li>У групу: скільки документів розпізнано, скільки подій у хронології, яка розбіжність.</li>
+  </ol>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

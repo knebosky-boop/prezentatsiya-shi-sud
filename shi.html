@@ -1,0 +1,165 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 0 · Що таке ШІ і що він може судді</title><meta name="description" content="Як працює мовна модель, чому вигадує, що куди йде, скільки коштує — без встановлення."><meta property="og:title" content="Урок 0 · Що таке ШІ і що він може судді"><meta property="og:description" content="Як працює мовна модель, чому вигадує, що куди йде, скільки коштує — без встановлення."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">🌱 Урок 0 · для суддів · без встановлення</span>
+  <h1>Що таке ШІ, як він працює і що він може судді</h1>
+  <p>Читається з телефона за 15 хвилин. Нічого ставити не треба — лише зрозуміти, з чим маємо справу, і спробувати один раз у браузері.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="terminal.html">Урок 1: поставити на комп'ютер →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Що це взагалі таке</h2>
+  <p><b>Claude</b> — це велика мовна модель, програма, яку навчили на величезній кількості текстів. Вона навчилася одного: <b>передбачати, яке слово має бути наступним</b>. Виявилося, що цього досить, щоб читати, переказувати, порівнювати, писати зв'язний текст і відповідати на питання.</p>
+  <div class="grid">
+    <div class="tile t2"><div class="e">📖</div><b>Уміє</b><span>Читати довгі тексти, переказувати, знаходити суперечності, писати за зразком, перевіряти за списком</span></div>
+    <div class="tile t1"><div class="e">🚫</div><b>Не є</b><span>Базою даних, пошуковиком, реєстром. «Знає закони» лише приблизно — як людина, що багато читала, але без книги під рукою</span></div>
+  </div>
+  <p>Тому правильна картинка — не «розумний комп'ютер, який усе знає», а <b>дуже начитаний стажист, якому ви даєте матеріали</b>. Дали позов і відзив — працює з ними. Не дали закон — «згадує» його з голови, і може згадати неточно.</p>
+</section>
+
+<section class="a1">
+  <h2><span class="n">2</span>Чому він «впевнено вигадує»</h2>
+  <p>Для моделі правдоподібний номер постанови і справжній — однаково гарні слова. Вона не бреше навмисно; вона добудовує текст так, щоб він виглядав як текст судового рішення. І номер справи «виглядає» — от вона його й пише.</p>
+  <div class="warn"><b>⚠️ Головне правило на весь курс</b>Кожен реквізит — номер справи, дата постанови, цитата, стаття — перевіряє суддя в ЄДРСР і в чинному тексті закону. Проєкт — чернетка. Це не недовіра, це так само, як ви перевіряєте за помічником.</div>
+  <p>Хороша новина: з цим можна працювати. Дали закон файлом — цитує файл. Дали постанову ВС — посилається на неї. Написали правило «не знайшов — скажи, не вигадуй» — здебільшого каже. Далі в курсі ми саме це і налаштуємо.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">3</span>Де він живе і що куди йде</h2>
+  <div class="flow">
+    <div>🧠 Розум — на серверах компанії Anthropic<small>Сама модель не стоїть у вас на комп'ютері. Коли вона читає документ, текст цього документа відправляється на сервер і там обробляється.</small></div>
+    <div>🖐 Руки — можуть бути у вас на комп'ютері<small>Програма Claude Code (урок 1) відкриває файли, створює документи — і щоразу питає дозволу.</small></div>
+    <div>📤 Що йде на сервер<small>Тільки те, що ви дали: вставили в чат, поклали в теку, попросили прочитати. Само по собі нічого не йде.</small></div>
+    <div>📝 Пам'яті між розмовами немає<small>Нова розмова — чистий аркуш. Те, що має пам'ятати завжди, записується у файл правил (урок 3).</small></div>
+  </div>
+  <div class="tip"><b>💡 Що це означає для персональних даних</b>Текст матеріалів справи опиняється на сервері іншої компанії. Тому: перевірити в налаштуваннях, що розмови не йдуть на навчання моделі; дотримуватися правил свого суду; не завантажувати зайвого. Докладно — урок 6.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Чат у браузері і помічник на комп'ютері</h2>
+  <div class="grid">
+    <div class="tile t4"><div class="e">💬</div><b>Чат (claude.ai)</b><span>Ви копіюєте текст у вікно, він відповідає. Файли треба прикріплювати руками, результат — копіювати назад</span></div>
+    <div class="tile t3"><div class="e">🧑‍💼</div><b>Claude Code</b><span>Той самий Claude, але на вашому комп'ютері: сам відкриває теку справи, читає всі PDF, створює Word і кладе поруч</span></div>
+  </div>
+  <p>Чат — щоб спробувати сьогодні. Помічник на комп'ютері — щоб працювати щодня. Курс іде саме до другого, але перший крок ми зробимо в чаті — прямо зараз, у розділі 7.</p>
+</section>
+
+<section class="a2">
+  <h2><span class="n">5</span>Що він дає судді насправді</h2>
+  <p>З досвіду кількох місяців щоденної роботи, а не з реклами:</p>
+  <ul>
+    <li>📚 <b>Читає 200 сторінок за хвилини</b> і каже: хто сторони, чого просять, які докази додано.</li>
+    <li>🗓 <b>Хронологія подій</b> з посиланням на документ і аркуш, звідки взято кожен факт.</li>
+    <li>✅ <b>Перевірка позову</b> на відповідність статтям 175–177 ЦПК (або протоколу — на строки за ст. 38 КУпАП): чого бракує, з нормою.</li>
+    <li>📝 <b>Проєкт ухвали чи рішення</b> у Word за вашим бланком і вашими правилами — з дослівними вимогами позивача.</li>
+    <li>🔍 <b>«Прочитай очима апеляції»</b> — де слабке місце мотивування, що можуть скасувати.</li>
+    <li>🔎 <b>Пошук по справі:</b> «де в матеріалах згадується сума 48 000», «у яких документах є підпис відповідача».</li>
+  </ul>
+  <h3>Чого не дає</h3>
+  <ul>
+    <li>Рішення за суддю. Він готує, ви вирішуєте.</li>
+    <li>Гарантованої точності. Перевіряти — завжди.</li>
+    <li>Знання вашого стилю без ваших правил і зразків. Перший проєкт буде «загальним»; після місяця правок — вашим.</li>
+  </ul>
+</section>
+
+<section class="a3">
+  <h2><span class="n">6</span>Скільки це коштує</h2>
+  <table>
+    <tr><td>Підписка Pro</td><td>Щоб спробувати і для нечастої роботи. Ліміт відповідей на кілька годин; для щоденних справ тісно.</td></tr>
+    <tr><td>Підписка Max</td><td>Для щоденної роботи зі справами: у кілька разів більші ліміти. Дорожче, але помічник на повний день.</td></tr>
+    <tr><td>Розпізнавання сканів</td><td>Копійки: порядку долара-двох за тисячу сторінок (урок 4). Це не обов'язково на старті.</td></tr>
+    <tr><td>Безкоштовний план</td><td>Claude Code не підтримує. Спробувати в чаті — можна.</td></tr>
+  </table>
+  <div class="tip"><b>💡 Порада</b>Почніть з Pro на місяць. Якщо через два тижні ловите себе на тому, що чекаєте, поки «відновиться ліміт», — час на Max.</div>
+</section>
+
+<section class="a4">
+  <h2><span class="n">7</span>Спробуйте зараз — 10 хвилин у браузері</h2>
+  <ol class="steps">
+    <li>Відкрийте <a href="https://claude.ai">claude.ai</a>, зареєструйтеся (можна без підписки для цієї вправи).</li>
+    <li>Відкрийте в ЄДРСР будь-яке <b>опубліковане</b> рішення (краще своє, яке добре пам'ятаєте). Скопіюйте текст цілком.</li>
+    <li>Вставте в чат і напишіть:</li>
+  </ol>
+  <div class="chat"><span class="u">Ви:</span> Перекажи це рішення у 5 рядках: хто сторони, чого просили, що вирішив суд і чому.</div>
+  <div class="chat"><span class="u">Ви:</span> Які докази згадано в рішенні? Списком.</div>
+  <div class="chat"><span class="u">Ви:</span> Прочитай мотивувальну частину очима апеляційного суду: де слабке місце?</div>
+  <div class="chat"><span class="u">Ви:</span> На які норми і постанови Верховного Суду посилається суд? Перелічи з номерами.</div>
+  <p>На останньому питанні подивіться уважно: усі номери — з тексту? Чи додав щось «від себе»? Це і є розділ 2 наживо.</p>
+  <div class="good"><b>✅ Що написати в групу</b>Одне спостереження: що здивувало — у хороший чи поганий бік. Без номера справи і без прізвищ.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">8</span>Дві речі, які варто знати до того, як іти далі</h2>
+  <p><b>Він не наглядач і не суддя.</b> Уся відповідальність за акт — на тому, хто підписує. Помічник — інструмент, як довідкова система чи помічник судді. Усе, що ми будемо будувати далі, будується навколо перевірки.</p>
+  <p><b>Не треба будувати все одразу.</b> Система, яку ви побачите в уроці 2, виросла з однієї теки й одного файлу правил за кілька місяців. Ваш перший крок — урок 1: поставити помічника і дати йому одну закриту справу.</p>
+</section>
+
+<section class="a5">
+  <h2><span class="n">9</span>Домашнє</h2>
+  <ol>
+    <li>Вправа з розділу 7 — одне спостереження в групу.</li>
+    <li>Оформити підписку Claude (Pro).</li>
+    <li>Написати в групу один рядок: суд, спеціалізація, Mac чи Windows.</li>
+    <li>Переглянути <a href="korotko.html">коротку презентацію</a> (8 слайдів) і правила групи в закріпленому.</li>
+  </ol>
+  <div class="tip"><b>🙋 Питання?</b>Технічні — боту Клодику в групі (напишіть @ і його ім'я, далі питання). Про судову практику — Катерині.</div>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>

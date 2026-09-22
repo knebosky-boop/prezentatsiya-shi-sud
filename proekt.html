@@ -1,0 +1,174 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 5 · Проєкт документа по суті — і перевірка</title><meta name="description" content="Закон у редакції на дату, практика з реєстру, «очима апеляції», довідка, вигадані постанови."><meta property="og:title" content="Урок 5 · Проєкт документа по суті — і перевірка"><meta property="og:description" content="Закон у редакції на дату, практика з реєстру, «очима апеляції», довідка, вигадані постанови."><meta property="og:type" content="article">
+<style>:root{--ink:#1d1b3a;--muted:#5d5a7a;--bg:#fff8f0;--c1:#ff5f6d;--c2:#ffc371;--c3:#7b5cff;--c4:#00c9a7;--c5:#2aa8ff;--card:#ffffff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.55}
+.hero{padding:48px 22px 56px;color:#fff;background:linear-gradient(135deg,var(--c3) 0%,var(--c1) 55%,var(--c2) 100%);border-radius:0 0 34px 34px;box-shadow:0 12px 30px rgba(123,92,255,.25)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);padding:6px 14px;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:.3px}
+.hero h1{font-size:34px;line-height:1.15;margin:16px 0 10px;font-weight:800}
+.hero p{font-size:18px;margin:0;opacity:.95}
+main{max-width:760px;margin:0 auto;padding:10px 16px 60px}
+section{background:var(--card);border-radius:24px;padding:22px 20px;margin:22px 0;box-shadow:0 6px 22px rgba(29,27,58,.07);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--c3))}
+section.a1{--accent:var(--c1)} section.a2{--accent:var(--c2)} section.a3{--accent:var(--c3)} section.a4{--accent:var(--c4)} section.a5{--accent:var(--c5)}
+h2{font-size:24px;margin:0 0 12px;line-height:1.25;font-weight:800}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:var(--accent,var(--c3));color:#fff;font-size:19px;margin-right:10px;vertical-align:middle}
+h3{font-size:19px;margin:18px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0} li{margin:6px 0}
+.cmd{display:flex;align-items:center;gap:10px;background:#15132b;color:#9ff7d8;border-radius:14px;padding:12px 14px;margin:10px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px;word-break:break-all}
+.cmd code{flex:1;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.cmd button{flex:none;border:0;border-radius:10px;padding:8px 12px;background:var(--c4);color:#06302a;font-weight:700;font-size:14px;cursor:pointer}
+.cmd button.ok{background:var(--c2)}
+code.i{background:#f1edff;color:#4b2fd6;padding:2px 7px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+.tip,.warn,.good{border-radius:16px;padding:14px 16px;margin:14px 0}
+.tip{background:#eaf6ff;border:2px solid #bfe3ff}
+.warn{background:#fff0f0;border:2px solid #ffc9cc}
+.good{background:#e8fbf5;border:2px solid #b3f0de}
+.tip b:first-child,.warn b:first-child,.good b:first-child{display:block;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,var(--t1,var(--c3)),var(--t2,var(--c5)))}
+.tile .big{font-size:28px;font-weight:800;line-height:1.1}
+.tile .e{font-size:30px}
+.tile b{display:block;font-size:18px;margin:6px 0 4px}
+.tile span{font-size:15px;opacity:.95}
+.t1{--t1:#ff5f6d;--t2:#ff9a5a}.t2{--t1:#7b5cff;--t2:#b06bff}.t3{--t1:#00b894;--t2:#00c9d6}.t4{--t1:#2a7bff;--t2:#2ac3ff}.t5{--t1:#ff8a00;--t2:#ffc371}.t6{--t1:#e94ba7;--t2:#ff7eb3}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15.5px}
+td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td:first-child{width:36%;font-weight:700;color:#4b2fd6;overflow-wrap:anywhere}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 50px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--accent,var(--c3));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chat{background:#f6f4ff;border-radius:16px;padding:12px 14px;margin:10px 0;font-size:16px}
+.chat .u{font-weight:700;color:#c2185b}
+.flow{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.flow div{background:linear-gradient(90deg,#f3efff,#fff4ea);border-radius:14px;padding:12px 14px;font-weight:600}
+.flow div small{display:block;font-weight:400;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:14px;padding:20px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.nav a{background:rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:8px 14px;border-radius:30px;font-weight:600;font-size:15px}
+a{color:#5b3cf5}
+@media (max-width:480px){.hero h1{font-size:28px}body{font-size:16.5px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-size:18px;padding:6px 0}
+</style></head><body>
+<header class="hero">
+  <span class="tag">⚖️ Урок 5 · серце курсу</span>
+  <h1>Проєкт документа по суті — і перевірка</h1>
+  <p>Ухвала про відкриття — ремесло. Рішення по суті — інша ліга: закон у правильній редакції, справжня практика, мотивування, яке встоїть в апеляції. Ось повний цикл.</p>
+  <div class="nav"><a href="navchannya.html">← Усі уроки</a><a href="skany.html">← Урок 4</a><a href="bezpeka.html">Урок 6: безпека →</a></div>
+</header>
+<main>
+
+<section class="a3">
+  <h2><span class="n">1</span>Чим рішення по суті відрізняється</h2>
+  <p>В ухвалі про відкриття помічник переписує вимоги і застосовує одну-дві норми ЦПК, які знає добре. У рішенні по суті йому треба:</p>
+  <ul>
+    <li>застосувати <b>матеріальну норму в редакції на дату подій</b> — а «з голови» він знає лише якусь редакцію, і невідомо яку;</li>
+    <li>послатися на <b>справжню практику Верховного Суду</b> — а «з голови» він схильний її вигадати;</li>
+    <li>написати <b>мотивування</b>, яке зв'язує факти з нормою, — це він уміє, якщо дати йому перші два.</li>
+  </ul>
+  <p>Тому весь цикл побудований на одному принципі: <b>закон і практику даємо файлами в теку, а не покладаємося на пам'ять моделі.</b></p>
+  <div class="flow">
+    <div>1 · Закон у теку<small>стаття в редакції на дату подій — файлом</small></div>
+    <div>2 · Практика в теку<small>постанова ВС з ЄДРСР — PDF-ом</small></div>
+    <div>3 · Проєкт<small>Word у теці справи за вашими правилами</small></div>
+    <div>4 · «Очима апеляції»<small>він критикує сам себе, ви правите</small></div>
+    <div>5 · Довідка «що перевірити»<small>і ваша перевірка кожного реквізиту</small></div>
+  </div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">2</span>Закон — файлом і в правильній редакції</h2>
+  <p>Чому не «з голови»: закон змінюється, а модель пам'ятає якусь одну версію. Для спору важлива редакція, <b>чинна на дату спірних відносин</b> (укладення договору, смерті спадкодавця, ДТП), а не сьогоднішня.</p>
+  <ol class="steps">
+    <li>Відкрийте статтю на <a href="https://zakon.rada.gov.ua">zakon.rada.gov.ua</a>.</li>
+    <li>Угорі — вкладка <b>«Редакції»</b>: оберіть ту, що діяла на потрібну дату (список з датами).</li>
+    <li>Скопіюйте текст потрібних статей у текстовий файл, назвіть зрозуміло: <i>ЦК ст. 1258-1261 ред. 2019-03-01.txt</i>. Покладіть у теку справи (або в спільну теку «Закони», якщо стаття потрібна часто).</li>
+  </ol>
+  <p>І в CLAUDE.md уже є правило: <i>«Норму брати в редакції, чинній на дату спірних відносин, і писати це прямо»</i>. Тепер він напише в тексті: <b>«…в редакції, чинній станом на 1 березня 2019 року»</b> — і апеляція бачить, що редакцію перевірено.</p>
+  <div class="tip"><b>💡 Закон змінився між подією і спором</b>Це не деталь, а вузол справи. Скажіть: «закон змінився [дата], поясни в окремому абзаці, яку редакцію застосовуєш і чому». Він напише абзац; ви перевірите логіку.</div>
+</section>
+
+<section class="a2">
+  <h2><span class="n">3</span>Практика Верховного Суду — з реєстру, не з пам'яті</h2>
+  <ol class="steps">
+    <li>Знайдіть потрібну постанову в <a href="https://reyestr.court.gov.ua">ЄДРСР</a> (ви знаєте свою категорію краще за будь-яку модель).</li>
+    <li>Збережіть як PDF у теку справи: <i>ВС 2023-05-17 справа 123-4567-21 аліменти.pdf</i>.</li>
+    <li>Скажіть помічнику: «у теці — постанова ВС, використай її позицію в мотивуванні, цитуй з посиланням на номер справи і дату».</li>
+  </ol>
+  <div class="warn"><b>⚠️ Правило трьох реквізитів</b>Кожна позиція ВС у проєкті — <b>номер справи + дата постанови + суд</b>. І кожна — перевірена вами в реєстрі перед підписом. Без винятків, навіть якщо «виглядає правильно». Особливо якщо виглядає правильно.</div>
+  <p>А якщо практики під рукою немає? Можна спитати: «яка є практика ВС з цього питання?» — але ставитися до відповіді як до <b>підказки для пошуку</b>, а не як до джерела. Він назве номери — ви шукаєте їх у реєстрі. Знайшли, і справа саме про це — використовуєте PDF. Не знайшли — цієї постанови не існує.</p>
+</section>
+
+<section class="a4">
+  <h2><span class="n">4</span>Промпт на проєкт</h2>
+  <div class="cmd"><code>Склади проєкт рішення по суті у справі з цієї теки. Матеріали — усі документи теки, розпізнані тексти в підтеці Текст. Норми — з файлів у теці (редакція на дату спірних відносин, напиши це прямо в тексті). Практику ВС бери з PDF у теці, з номером справи і датою; іншої практики не вигадуй — не знайшов, так і напиши в довідці. Структура — за ст. 265 ЦПК, стиль — як у теці Зразки. Збережи як Word у теку справи, поруч — файл «Довідка.md»: що мені перевірити, де ризик, чого бракує.</code><button>Копіювати</button></div>
+  <p>Для вироку: «структура за ст. 374 КПК, формулювання обвинувачення дослівно з обвинувального акта». Для КУпАП: «структура за ст. 283 КУпАП, спершу перевір строк за ст. 38».</p>
+  <div class="tip"><b>💡 Спершу план</b>У складній справі додайте: «спочатку розпиши план мотивування — я погоджу, потім пиши». Дешевше поправити план, ніж переписувати текст.</div>
+</section>
+
+<section class="a1">
+  <h2><span class="n">5</span>«Прочитай очима апеляції»</h2>
+  <p>Проєкт є. Тепер — найкорисніший промпт курсу:</p>
+  <div class="cmd"><code>Прочитай свій проєкт очима апеляційного суду. Де слабкі місця мотивування? Які доводи сторін не оцінено? Чи всі вимоги вирішено? Чи є в резолютивній частині те, чого немає в мотивувальній? Що можуть скасувати і чому? Списком, без виправлень.</code><button>Копіювати</button></div>
+  <p>Він знайде 3–7 пунктів. Частина — слушні, частина — ні. Ви обираєте, що виправити: «пункти 1, 3 і 4 — виправ; 2 — не треба, бо …». І потім ще раз «очима апеляції». Два кола зазвичай досить.</p>
+  <div class="good"><b>✅ Що зазвичай ловить</b>Неоцінений довід відповідача. Вимога, про яку в резолютивній забули. Судові витрати без розрахунку. Норму процитовано, а до фактів не прив'язано.</div>
+</section>
+
+<section class="a5">
+  <h2><span class="n">6</span>Довідка «що перевірити» — і ваша перевірка</h2>
+  <p>Поруч із проєктом лежить довідка. Це його список сумнівів: «суму 12 400 взято з розписки, а. с. 34 — перевірте, бо в позові 12 000»; «практики ВС щодо … у теці не було, мотивування без неї»; «редакцію ст. … взято на дату договору, якщо спірна дата інша — переробити».</p>
+  <p>Ваша перевірка — не «прочитати проєкт», а <b>пройти списком</b>:</p>
+  <ol>
+    <li>Кожна вимога — вирішена в резолютивній? Дослівно?</li>
+    <li>Кожна норма — та редакція? Той текст (відкрити файл і порівняти)?</li>
+    <li>Кожна постанова ВС — є в реєстрі, про те саме, дата збігається?</li>
+    <li>Кожна цифра — з документа (а. с.)?</li>
+    <li>Кожен довід сторін — оцінений?</li>
+  </ol>
+  <p>Так, це робота. Але це <b>ваша</b> робота як судді — та сама, що з помічником-людиною. Помічник зняв з вас читання, набір і структуру, а не відповідальність.</p>
+</section>
+
+<section class="a2">
+  <h2><span class="n">7</span>Як виглядає вигадана постанова</h2>
+  <p>Щоб не бути голослівними, ось як це трапляється (приклад узагальнений):</p>
+  <div class="chat"><span class="u">Він:</span> …як зазначив Верховний Суд у постанові від 14 лютого 2020 року у справі № 522/1234/18, розмір аліментів…</div>
+  <p>Усе виглядає бездоганно: формат номера, правдоподібна дата, слушна теза. Відкриваєте реєстр: справа з таким номером існує, але вона про стягнення боргу за кредитом, а постанови ВС в ній немає взагалі. Теза при цьому може бути правильною — просто підпис під нею фальшивий.</p>
+  <div class="warn"><b>⚠️ Як ловиться</b>Тільки реєстром. Ні «звучить правильно», ні «я таку пам'ятаю» не рахується. Один вигаданий реквізит у підписаному рішенні — і решта правильного вже нікого не цікавить.</div>
+  <p>Як не допускати: практика — файлами в теку (розділ 3), у CLAUDE.md — «не знайшов — скажи», і після проєкту — окремий промпт: <i>«Перелічи всі номери справ і дати постанов, на які ти послався, і вкажи, з якого файла в теці взято кожен. Ті, що не з файла, — познач».</i></p>
+</section>
+
+<section class="a3">
+  <h2><span class="n">8</span>Найкращий учитель — ваше власне рішення</h2>
+  <p>Ви робите це на закритій справі, у якій уже є ваше рішення. Скористайтеся:</p>
+  <div class="cmd"><code>У теці є моє справжнє рішення в цій справі — файл [назва]. Порівняй свій проєкт із ним: де ти слабший, де сильніший, які доводи я оцінила, а ти пропустив, що я написала коротше і чому це краще. Чесно, без компліментів.</code><button>Копіювати</button></div>
+  <p>Результат — п'ять рядків, які варті більше за будь-який урок: ви побачите, чого йому бракує саме у ваших справах, і кожен пункт можна перетворити на правило в CLAUDE.md.</p>
+</section>
+
+<section class="a4">
+  <h2><span class="n">9</span>Пастки</h2>
+  <table>
+    <tr><td>Проєкт «загальний», не ваш</td><td>Немає зразків або він їх не прочитав. «Перечитай зразки в теці Зразки і перепиши в тому стилі».</td></tr>
+    <tr><td>Мотивування довге і водянисте</td><td>«Скороти мотивування вдвічі, лиши лише те, що зв'язує факти з нормою». І в CLAUDE.md — межу обсягу.</td></tr>
+    <tr><td>Резолютивна не збігається з вимогами</td><td>Найнебезпечніше. «Звір резолютивну частину з прохальною частиною позову: кожна вимога — вирішена?»</td></tr>
+    <tr><td>Судові витрати</td><td>Розрахунок він робить, але звіряйте зі ставкою за законом і квитанцією. Це окремий рядок у довідці.</td></tr>
+    <tr><td>Word відкривається «криво»</td><td>Дайте бланк: порожній .docx з вашими полями в теці Зразки, і «за бланком».</td></tr>
+  </table>
+</section>
+
+<section class="a1">
+  <h2><span class="n">10</span>Домашнє</h2>
+  <ol>
+    <li>У теку справи — статті в редакції на дату (розділ 2) і 1–2 постанови ВС PDF-ом (розділ 3).</li>
+    <li>Проєкт по суті у Word + довідка (розділ 4).</li>
+    <li>Два кола «очима апеляції» (розділ 5).</li>
+    <li>Кожен реквізит ВС — у реєстрі. Знайшли вигаданий — це головний результат тижня, напишіть про нього.</li>
+    <li>Порівняння зі своїм рішенням (розділ 8): 5 рядків у групу.</li>
+  </ol>
+</section>
+
+<p class="foot">Катерина Ремез · вересень 2026</p>
+</main>
+<script>document.querySelectorAll('.cmd button').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.previousElementSibling.textContent).then(()=>{b.textContent='Скопійовано ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Копіювати';b.classList.remove('ok')},1800)})})</script></body></html>
