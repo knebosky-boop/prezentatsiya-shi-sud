@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Що ще ми наробили — крім проєктів рішень</title>
+<meta name="description" content="Відео, фотоархів, голосові, книга, боти й програми: що суддя з помічником наробили за пів року, крім проєктів рішень. Хвалимося.">
+<meta property="og:title" content="Що ще ми наробили">
+<meta property="og:description" content="Монтуємо відео, перебираємо фотоархів, розпізнаємо голосові, пишемо книгу, будуємо ботів. Усе — розмовою з помічником.">
+<style>
+  :root{
+    --navy:#1b2a4a; --navy2:#243a63; --gold:#c9a227; --ink:#22293a;
+    --paper:#f7f5f0; --muted:#6b7280; --accent:#8b1e2d; --green:#2f6b3a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{font-family:Georgia,'Times New Roman',serif;background:#0e1526;color:var(--ink)}
+  .deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:calc(env(safe-area-inset-top) + 56px) 24px calc(env(safe-area-inset-bottom) + 52px);
+    background:var(--paper);position:relative;
+  }
+  .slide.dark{background:linear-gradient(150deg,var(--navy) 0%,var(--navy2) 100%);color:#f2efe6}
+  .kicker{font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  h1{font-size:clamp(28px,8.4vw,38px);line-height:1.14;font-weight:700}
+  h2{font-size:clamp(23px,6.8vw,30px);line-height:1.18;margin-bottom:22px;color:var(--navy)}
+  .dark h2{color:#f2efe6}
+  h2 .num{color:var(--gold);margin-right:10px}
+  .sub{font-size:17px;color:var(--muted);margin-top:18px;line-height:1.5}
+  .dark .sub{color:#c9cfdd}
+  ul.main{list-style:none;font-size:19px;line-height:1.4}
+  ul.main>li{padding:13px 0 13px 24px;position:relative;border-bottom:1px solid rgba(27,42,74,.12)}
+  ul.main>li:last-child{border-bottom:none}
+  ul.main>li::before{content:"—";position:absolute;left:0;color:var(--gold);font-weight:700}
+  ul.main.ok>li::before{content:"✓";color:var(--green)}
+  ul.main.no>li::before{content:"✗";color:var(--accent)}
+  .dark ul.main>li{border-color:rgba(255,255,255,.14)}
+  b{color:var(--navy)} .dark b{color:#ffd867}
+  .note{margin-top:22px;padding:14px 16px;background:rgba(201,162,39,.12);border-left:4px solid var(--gold);
+        font-size:16px;line-height:1.45}
+  .dark .note{background:rgba(255,255,255,.07);color:#e8e4d6}
+  .warn{border-left-color:var(--accent);background:rgba(139,30,45,.08)}
+  .steps{counter-reset:st;display:flex;flex-direction:column;gap:8px}
+  .step{counter-increment:st;display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(27,42,74,.12)}
+  .step:last-child{border-bottom:none}
+  .step::before{content:counter(st);flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);
+                display:flex;align-items:center;justify-content:center;font-family:Verdana,sans-serif;font-size:15px;font-weight:700}
+  .step div{font-size:18px;line-height:1.35}
+  .footer{position:absolute;left:24px;right:24px;bottom:calc(env(safe-area-inset-bottom) + 14px);
+          display:flex;justify-content:space-between;
+          font-family:Verdana,Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .dark .footer{color:#8f9ab5}
+  .quote{font-size:23px;line-height:1.4;font-style:italic;position:relative;padding-left:26px}
+  .quote::before{content:"«";position:absolute;left:0;top:-8px;font-size:50px;color:var(--gold);font-style:normal}
+  .tag{display:inline-block;font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+       background:var(--navy);color:#f2efe6;padding:4px 12px;border-radius:3px;margin-bottom:18px;align-self:flex-start}
+  .dark .tag{background:var(--gold);color:var(--navy)}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:10;
+          padding:calc(env(safe-area-inset-top) + 8px) 22px 8px;
+          display:flex;justify-content:space-between;align-items:center;
+          font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.06em;
+          color:#c9cfdd;background:linear-gradient(to bottom,rgba(14,21,38,.55),rgba(14,21,38,0));
+          pointer-events:none}
+  .topbar .counter{font-variant-numeric:tabular-nums;background:rgba(14,21,38,.55);color:#f2efe6;
+                   padding:3px 10px;border-radius:12px}
+  .swipe-hint{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 6px);left:50%;transform:translateX(-50%);
+        z-index:10;font-family:Verdana,sans-serif;font-size:10px;color:#9aa3b8;letter-spacing:.08em;
+        background:rgba(14,21,38,.55);padding:3px 12px;border-radius:12px;
+        transition:opacity .6s;pointer-events:none;white-space:nowrap}
+  .swipe-hint.gone{opacity:0}
+  /* три картки способів */
+  .ways{display:flex;flex-direction:column;gap:10px}
+  .way{padding:13px 14px;border-radius:8px;background:rgba(27,42,74,.06);border:1px solid rgba(27,42,74,.14)}
+  .way .t{font-family:Verdana,sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+  .way .d{font-size:16px;line-height:1.4}
+  .way.pick{background:rgba(201,162,39,.16);border-color:var(--gold)}
+  /* таблиця пам'яті */
+  .mem{width:100%;border-collapse:collapse;font-size:16px;margin-top:4px}
+  .mem th{font-family:Verdana,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 0;border-bottom:2px solid rgba(27,42,74,.2)}
+  .mem td{padding:11px 0;border-bottom:1px solid rgba(27,42,74,.12);vertical-align:top;line-height:1.35}
+  .mem td:last-child{text-align:right;white-space:nowrap;font-family:Verdana,sans-serif;font-size:15px;font-weight:700;color:var(--navy);padding-left:12px}
+  .mem tr.est td:last-child{color:var(--accent)}
+  .mem tr.big td:last-child{color:var(--accent)}
+  .small{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.45}
+  /* шпаргалка */
+  .cheat{display:flex;flex-direction:column;gap:8px}
+  .cheat div{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .cheat div:last-child{border-bottom:none}
+  .cheat code{font-family:Menlo,Consolas,monospace;font-size:15px;background:rgba(0,0,0,.35);color:#ffd867;padding:3px 8px;border-radius:4px;white-space:nowrap;flex:0 0 auto}
+  .cheat span{font-size:16px;line-height:1.35}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tile{padding:12px 12px;border-radius:8px;background:rgba(27,42,74,.06);border:1px solid rgba(27,42,74,.14)}
+  .tile .e{font-size:24px;margin-bottom:4px}
+  .tile b{display:block;font-size:15px;margin-bottom:3px}
+  .tile span{font-size:13.5px;line-height:1.35;color:#3b4252}
+  .dark .tile{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)} .dark .tile span{color:#d9dce6}
+  .big{font-family:Verdana,sans-serif;font-size:clamp(40px,14vw,64px);font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px}
+  .nums{display:grid;grid-template-columns:1fr 1fr;gap:16px 10px}
+  .nums div{padding:8px 0}
+  .nums .v{font-family:Verdana,sans-serif;font-size:clamp(26px,8vw,36px);font-weight:700;color:var(--gold);line-height:1.1}
+  .nums .l{font-size:14px;line-height:1.35;margin-top:4px}
+  /* дві колонки на широкому екрані */
+  @media (min-width:700px){
+    .slide{padding-left:max(24px,calc(50vw - 330px));padding-right:max(24px,calc(50vw - 330px))}
+    .ways{flex-direction:row} .way{flex:1}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><span>Що ще ми наробили</span><span class="counter" id="counter">1 / 13</span></div>
+<div class="swipe-hint" id="hint">гортайте вгору ↑</div>
+<div class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide dark">
+  <div class="kicker">Навчання для суддів · для натхнення</div>
+  <h1>Що ще ми наробили</h1>
+  <div class="sub">Проєкти рішень — це лише половина. За пів року з помічником ми монтували відео, розібрали фотоархів на сотні гігабайт, розпізнали голосові, пишемо книгу і збудували десяток програм і ботів. Хвалимося — щоб ви бачили, куди це росте.</div>
+  <div class="footer"><span>Катерина Ремез</span><span>вересень 2026</span></div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2><span class="num">01</span>Головне відкриття</h2>
+  <div class="quote" style="font-size:21px;color:var(--navy)">Помічник не лише пише документи. Він пише програми — на прохання, звичайною мовою, за одну розмову.</div>
+  <ul class="main" style="margin-top:22px">
+    <li>Жодного рядка коду я не написала сама. Я описую, що хочу, і перевіряю результат.</li>
+    <li>Усе нижче зроблено тим самим терміналом, у тій самій робочій теці, що й рішення.</li>
+    <li>Технічну освіту не здобула. Судова — є, і її вистачило.</li>
+  </ul>
+</section>
+
+<!-- 3 -->
+<section class="slide dark">
+  <h2><span class="num">02</span>Відеомонтаж</h2>
+  <ul class="main">
+    <li><b>Кліп до дня народження сина</b> — з телефонних фото й відео, з написами й переходами.</li>
+    <li><b>Кліп до Дня міста</b> — вертикальний, для телефона, з драматургією «до чого веде», а не просто «було — стало».</li>
+    <li>Я ставила вимоги як замовниця: без чорних полів, без «мила», дрібне — по два-чотири в кадр. Помічник переробляв, поки не стало добре.</li>
+  </ul>
+  <div class="note">Інструмент — безкоштовна консольна програма для відео. Я жодного разу не відкривала її сама: усе через розмову.</div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <h2><span class="num">03</span>Фотоархів</h2>
+  <div class="nums">
+    <div><div class="v">280 ГБ</div><div class="l">фото й відео за багато років, з трьох дисків і телефона</div></div>
+    <div><div class="v">44 тис.</div><div class="l">файлів, звірених по контрольних сумах — жодного не загублено</div></div>
+  </div>
+  <ul class="main" style="margin-top:14px">
+    <li>Дублі шукала програма, яку помічник написав за вечір: за відбитком картинки і геометрією, а не за назвою файлу.</li>
+    <li>Відеодублі — по кадрах кожні дві секунди; вирізки з довгого відео теж знаходить.</li>
+    <li>Розкладено за роками, темами й людьми. Диски звільнені. Я лише дивилася сторінки «залишити / видалити» і тиснула.</li>
+  </ul>
+</section>
+
+<!-- 5 -->
+<section class="slide dark">
+  <h2><span class="num">04</span>Голосові — у текст</h2>
+  <ul class="main">
+    <li>Розпізнавання голосових повідомлень і записів <b>на своєму комп'ютері</b>, без відправки кудись у хмару.</li>
+    <li>Годинний запис розшифровується швидше, ніж триває. Уночі — чергою, сама.</li>
+    <li>З розшифровок — конспект, теми, цитати з позначкою часу.</li>
+  </ul>
+  <div class="note">Цього тижня та сама схема стежить за онлайн-навчанням: слухає, розшифровує і пише мені в месенджер «перерва» і «знову говорять». Я в цей час можу працювати.</div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <h2><span class="num">05</span>Книга</h2>
+  <ul class="main">
+    <li>Пишемо роман. Матеріал — розшифровані голосові, нотатки, спогади.</li>
+    <li>Помічник тримає структуру: герої, лінії, хронологія, що вже написано, що висить.</li>
+    <li>Чернетки розділів — його, голос — мій. Правило одне: не додумувати за живих людей. Лише те, що є в матеріалі.</li>
+  </ul>
+  <div class="note warn">Матеріали книги лежать у зашифрованому томі, який відкривається лише на домашньому комп'ютері. Помічник це налаштував і сам про це нагадує.</div>
+</section>
+
+<!-- 7 -->
+<section class="slide dark">
+  <h2><span class="num">06</span>Боти в месенджерах</h2>
+  <div class="tiles">
+    <div class="tile"><div class="e">☀️</div><b>Черговий</b><span>Щоранку: що надійшло у справи, де підходить строк, які засідання. Увечері — «завтра три справи», вдень — «за годину»</span></div>
+    <div class="tile"><div class="e">📰</div><b>Новинар</b><span>Збирає новини з відкритих каналів і шле мені та рідним — у Telegram і через міст у WhatsApp</span></div>
+    <div class="tile"><div class="e">🎓</div><b>Наставник</b><span>Відповідає у вашій групі на технічні питання про курс — 24/7, знає всі уроки</span></div>
+    <div class="tile"><div class="e">✍️</div><b>Суфлер</b><span>Готує чернетки відповідей на повідомлення в моєму стилі; я лише схвалюю або переписую</span></div>
+  </div>
+  <div class="note">Кожен бот — один вечір розмови. Найкориснішим виявився найнудніший: черговий зі строками.</div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <h2><span class="num">07</span>Автоматика в теці справ</h2>
+  <div class="tiles">
+    <div class="tile"><div class="e">🕰️</div><b>Диспетчер</b><span>Запускає всі задачі за розкладом і доганяє пропущене, якщо комп'ютер спав</span></div>
+    <div class="tile"><div class="e">👁️</div><b>Сторож</b><span>Стежить за справами: зміна норми, скасування, відступ Верховного Суду — сигнал мені</span></div>
+    <div class="tile"><div class="e">⏳</div><b>Строки</b><span>Щодня таблиця: де від відкриття провадження минає 60 днів, а рішення немає</span></div>
+    <div class="tile"><div class="e">📚</div><b>Огляд практики</b><span>Раз на тиждень сам читає свіжі постанови за моїми категоріями і пише записку</span></div>
+    <div class="tile"><div class="e">✅</div><b>Автоперевірка</b><span>Щойно створено проєкт — шукає незаповнені поля, заборонені звороти, неперевірені реквізити</span></div>
+    <div class="tile"><div class="e">💾</div><b>Пам'ять і копія</b><span>Щогодини знімок усіх правил і нотаток — можна повернути будь-який файл на будь-яку годину; щовечора копія</span></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide dark">
+  <h2><span class="num">08</span>Власні програми з іконками</h2>
+  <ul class="main">
+    <li><b>Читалка</b> нотаток — окремий застосунок для всіх моїх текстових файлів: пошук, закладки, номер справи веде в теку справи.</li>
+    <li><b>Пульт вікон</b> — бачу всі відкриті розмови помічника одразу: яка справа, чи зайнятий, останнє прохання.</li>
+    <li><b>Гарячі клавіші</b> для перемикання вікон і <b>іконки для тек</b> — золота шапочка на теці навчання намальована кодом.</li>
+    <li><b>Віртуальна камера</b>: записав себе на хвилину — і в Zoom іде безшовна петля, поки я працюю.</li>
+  </ul>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <h2><span class="num">09</span>Аналітика для суду</h2>
+  <div class="nums">
+    <div><div class="v">33 тис.</div><div class="l">рішень нашого суду за півтора року — проаналізовано за категоріями, суддями, строками</div></div>
+    <div><div class="v">24 тис.</div><div class="l">постанов апеляції — що встояло, що ні, у кого і в чому</div></div>
+  </div>
+  <ul class="main" style="margin-top:14px">
+    <li>Записка голові суду про спеціалізацію суддів — з цифрами, а не з відчуттів.</li>
+    <li>Власний профіль скасувань: які категорії й жанри падають — і чому. Це тепер дивиться автоперевірка перед кожним проєктом.</li>
+    <li>Тези на наукову конференцію і програма на вибори — той самий метод: дані, потім текст.</li>
+  </ul>
+</section>
+
+<!-- 11 -->
+<section class="slide dark">
+  <h2><span class="num">10</span>І просто для радості</h2>
+  <ul class="main">
+    <li><b>Іграшка-кіт</b>, який какає мармеладками — одна сторінка, фізика, посилання в Telegram друзям.</li>
+    <li><b>Жарт для розробника</b> — пляжна сторінка з кнопками, названими як його програми.</li>
+    <li><b>Презентації й цей курс</b> — сайт, уроки, слайди, які ви зараз гортаєте. Теж він.</li>
+  </ul>
+  <div class="note">Якщо помічник уміє зробити кота з мармеладками — повірте, ухвалу про залишення без руху він тим більше зробить.</div>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <h2><span class="num">11</span>У цифрах</h2>
+  <div class="nums">
+    <div><div class="v">80+</div><div class="l">програм-інструментів у робочій теці</div></div>
+    <div><div class="v">10+</div><div class="l">служб, що працюють самі після увімкнення комп'ютера</div></div>
+    <div><div class="v">4</div><div class="l">боти в месенджерах</div></div>
+    <div><div class="v">3</div><div class="l">власні застосунки з іконками</div></div>
+    <div><div class="v">48</div><div class="l">«довідників» за категоріями справ, які він читає перед проєктом</div></div>
+    <div><div class="v">0</div><div class="l">рядків коду, написаних мною</div></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide dark">
+  <div class="tag">Замість підсумку</div>
+  <div class="quote">Усе це — не «айтішниця». Це суддя, яка навчилася чітко казати, чого хоче, і перевіряти, що отримала. Ті самі дві навички, що й у залі.</div>
+  <div class="sub">Почніть з уроку 1. Кіт з мармеладками може почекати.</div>
+  <div class="footer"><span>Катерина Ремез</span><span>вересень 2026</span></div>
+</section>
+
+</div>
+<script>
+const deck=document.getElementById('deck');
+const slides=[...deck.querySelectorAll('.slide')];
+const counter=document.getElementById('counter');
+const hint=document.getElementById('hint');
+function update(){
+  const i=Math.round(deck.scrollTop/window.innerHeight);
+  const n=Math.max(0,Math.min(slides.length-1,i));
+  counter.textContent=(n+1)+' / '+slides.length;
+  if(n>0)hint.classList.add('gone');
+}
+deck.addEventListener('scroll',update,{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();
+    deck.scrollBy({top:-window.innerHeight,behavior:'smooth'});}
+});
+update();
+</script>
+</body>
+</html>
